@@ -16,28 +16,10 @@ module.exports = {
       id_usuario: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'usuario',
-        //   key: 'id_usuario',
-        // },
       },
       id_midia: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'midia',
-        //   key: 'id_midia',
-        // },
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
       },
     });
   },

@@ -14,26 +14,13 @@ module.exports = {
         allowNull: false,
       },
       estado: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-      },
-      proprietario: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
+        defaultValue: true,
       },
       tipo: {
         type: Sequelize.STRING(50),
         allowNull: false,
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
       },
     });
   },

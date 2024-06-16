@@ -3,27 +3,36 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('grupo_media', {
-      id_grupo_media: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      id_grupo: {
+    await queryInterface.createTable('playlist_media', {
+      id_midia: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
         references: {
-          model: 'grupo',
-          key: 'id_grupo',
+          model: 'midia',
+          key: 'id_midia',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
-      id_media: {
+      id_perfil_usuario: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'midia',
-        //   key: 'id_midia',
-        // },
+        references: {
+          model: 'perfil_usuario',
+          key: 'id_perfil_usuario',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      id_playlist: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        references: {
+          model: 'playlist',
+          key: 'id_playlist',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -39,6 +48,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('grupo_media');
+    await queryInterface.dropTable('playlist_media');
   }
 };

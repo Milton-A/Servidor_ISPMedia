@@ -3,28 +3,17 @@ import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../database/index";
 
 interface GrupoAttributes {
-  id_grupo: number;
-  nome: string;
-  estado: string;
-  proprietario: string;
-  tipo: string;
+  id_grupo?: number;
+  nome?: string;
+  estado?: string;
+  tipo?: string;
 }
 
-interface GrupoCreationAttributes
-  extends Optional<GrupoAttributes, "id_grupo"> {}
-
-class GrupoModel
-  extends Model<GrupoAttributes, GrupoCreationAttributes>
-  implements GrupoAttributes
-{
-  public id_grupo!: number;
-  public nome!: string;
-  public estado!: string;
-  public proprietario!: string;
-  public tipo!: string;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+class GrupoModel extends Model implements GrupoAttributes {
+  id_grupo?: number;
+  nome?: string;
+  estado?: string;
+  tipo?: string;
 }
 
 GrupoModel.init(
@@ -40,10 +29,6 @@ GrupoModel.init(
     },
     estado: {
       type: DataTypes.STRING(50),
-      allowNull: false,
-    },
-    proprietario: {
-      type: DataTypes.STRING(100),
       allowNull: false,
     },
     tipo: {

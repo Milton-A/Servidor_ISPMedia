@@ -9,22 +9,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      id_midia: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        // references: {
-        //   model: 'midia',
-        //   key: 'id_midia',
-        // },
-      },
-      id_perfil_usuario: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        // references: {
-        //   model: 'perfil_usuario',
-        //   key: 'id_perfil_usuario',
-        // },
-      },
       nome: {
         type: Sequelize.STRING(100),
         allowNull: false,
@@ -38,15 +22,9 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      createdAt: {
-        type: Sequelize.DATE,
+      estado: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
       },
     });
   },

@@ -12,10 +12,6 @@ module.exports = {
       id_usuario: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'usuario',
-        //   key: 'id_usuario',
-        // },
       },
       username: {
         type: Sequelize.STRING(50),
@@ -29,16 +25,6 @@ module.exports = {
       bio: {
         type: Sequelize.TEXT,
         allowNull: true,
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
       },
     });
   },

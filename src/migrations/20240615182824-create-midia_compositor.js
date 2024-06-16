@@ -12,28 +12,14 @@ module.exports = {
       id_midia: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        references: {
-          model: 'midia',
-          key: 'id_midia',
-        },
       },
       id_compositor: {
         type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'compositor',
-          key: 'id_compositor',
-        },
+        allowNull: true,
       },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
+      id_artista: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: true,
       },
     });
   },

@@ -1,47 +1,24 @@
-// Importe os módulos necessários do Sequelize
-import { DataTypes, Model, Optional } from "sequelize";
+// Importações do Sequelize e da conexão
+import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
 
-interface PlaylistAttributes {
-  id_playlist: number;
-  id_midia: number;
-  id_perfil_usuario: number;
-  nome: string;
-  data: Date;
-  visibilidade: string;
+// Definição do modelo
+class Playlist extends Model {
+  // Campos da tabela
+  id_playlist!: number;
+  nome!: string;
+  data!: Date;
+  visibilidade!: string;
+  estado!: boolean;
 }
 
-interface PlaylistCreationAttributes
-  extends Optional<PlaylistAttributes, "id_playlist" | "data"> {}
-
-class PlaylistModel
-  extends Model<PlaylistAttributes, PlaylistCreationAttributes>
-  implements PlaylistAttributes
-{
-  public id_playlist!: number;
-  public id_midia!: number;
-  public id_perfil_usuario!: number;
-  public nome!: string;
-  public data!: Date;
-  public visibilidade!: string;
-}
-
-PlaylistModel.init(
+// Inicialização do modelo
+Playlist.init(
   {
     id_playlist: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true,
-    },
-    id_midia: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-      // Adicionar referência se necessário
-    },
-    id_perfil_usuario: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-      // Adicionar referência se necessário
     },
     nome: {
       type: DataTypes.STRING(100),
@@ -56,12 +33,18 @@ PlaylistModel.init(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+    estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   },
   {
     sequelize: connection,
     tableName: "playlist",
     timestamps: true,
+    underscored: true, // opcional: define que os nomes das colunas no banco de dados serão com snake_case
   }
 );
 
-export default PlaylistModel;
+// Exportação do modelo
+export default Playlist;

@@ -3,24 +3,15 @@ import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../database/index";
 
 interface GrupoMediaAttributes {
-  id_grupo_media: number;
-  id_grupo: number;
-  id_media: number;
+  id_grupo_media?: number;
+  id_grupo?: number;
+  id_media?: number;
 }
 
-interface GrupoMediaCreationAttributes
-  extends Optional<GrupoMediaAttributes, "id_grupo_media"> {}
-
-class GrupoMediaModel
-  extends Model<GrupoMediaAttributes, GrupoMediaCreationAttributes>
-  implements GrupoMediaAttributes
-{
-  public id_grupo_media!: number;
-  public id_grupo!: number;
-  public id_media!: number;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+class GrupoMediaModel extends Model implements GrupoMediaAttributes {
+  id_grupo_media?: number;
+  id_grupo?: number;
+  id_media?: number;
 }
 
 GrupoMediaModel.init(
@@ -41,7 +32,6 @@ GrupoMediaModel.init(
     id_media: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      // Adicionar referência se necessário
     },
   },
   {

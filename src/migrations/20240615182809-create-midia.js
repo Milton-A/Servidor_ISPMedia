@@ -13,71 +13,50 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
-      id_formato_media: {
+      id_legenda: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'formato_media',
-        //   key: 'id_formato_media',
-        // },
       },
-      id_autor: {
+      id_genero_media: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'autor',
-        //   key: 'id_autor',
-        // },
       },
-      id_musico: {
+      id_tipo_media: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'musico',
-        //   key: 'id_musico',
-        // },
       },
-      id_formato_media: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        // references: {
-        //   model: 'formato_media',
-        //   key: 'id_formato_media',
-        // },
-      },
-      id_midia_artista: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        // references: {
-        //   model: 'midia_artista',
-        //   key: 'id_midia_artista',
-        // },
-      },
-      id_midia_compositor: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        // references: {
-        //   model: 'midia_compositor',
-        //   key: 'id_midia_compositor',
-        // },
-      },
-      estado: {
+      duracao: {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      imagem: {
+      arquivo: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
+      id_formato_media: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+      },
+      tamanho: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
+      data: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
+      id_perfil_usuario: {
         type: Sequelize.STRING(255),
         allowNull: true,
       },
-      createdAt: {
-        type: Sequelize.DATE,
+      estado: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: false,
       },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
+      estado: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
       },
     });
   },

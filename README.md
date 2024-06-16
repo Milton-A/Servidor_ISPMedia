@@ -1,6 +1,12 @@
-Passo 1: Gerar as Migrations
-Execute os seguintes comandos para gerar as migrations:
+---
 
+## Configuração e Migração das Tabelas com Sequelize
+
+### Passo 1: Gerar as Migrations
+
+Execute os seguintes comandos para gerar as migrations necessárias:
+
+```bash
 npx sequelize-cli migration:generate --name create-tipo_media
 npx sequelize-cli migration:generate --name create-formato_media
 npx sequelize-cli migration:generate --name create-editora
@@ -25,8 +31,45 @@ npx sequelize-cli migration:generate --name create-radio
 npx sequelize-cli migration:generate --name create-playlist
 npx sequelize-cli migration:generate --name create-grupo_media
 npx sequelize-cli migration:generate --name create-gupo_usuario
+```
 
-passo 2: criar as tabelas
+### Passo 2: Criar Alter Tables
 
-npx sequelize-cli db:migrate  
- Passo 3: Criar as relações entre as tabelas
+Use os comandos a seguir para gerar as migrations de alteração para adicionar chaves estrangeiras às tabelas:
+
+```bash
+npx sequelize-cli migration:generate --name add-foreign-key-to-grupo_media
+npx sequelize-cli migration:generate --name add-foreign-keys-to-midia_compositor
+npx sequelize-cli migration:generate --name add-foreign-keys-to-midia_artista
+npx sequelize-cli migration:generate --name add-foreign-keys-to-midia_album
+npx sequelize-cli migration:generate --name add-foreign-keys-to-legendas
+npx sequelize-cli migration:generate --name add-foreign-keys-to-editora
+npx sequelize-cli migration:generate --name add-foreign-keys-to-midia
+npx sequelize-cli migration:generate --name add-foreign-keys-to-concerto
+npx sequelize-cli migration:generate --name add-foreign-keys-to-criticas
+npx sequelize-cli migration:generate --name add-foreign-keys-to-grupo_usuario
+npx sequelize-cli migration:generate --name add-foreign-keys-to-partilha
+npx sequelize-cli migration:generate --name add-foreign-key-to-perfil_usuario
+npx sequelize-cli migration:generate --name add-foreign-key-to-notificacoes
+npx sequelize-cli migration:generate --name add-foreign-keys-to-grupo_media
+npx sequelize-cli migration:generate --name add-foreign-keys-to-playlist
+npx sequelize-cli migration:generate --name add-foreign-keys-to-artista 
+```
+
+### Passo 3: Criar a Base de Dados
+
+Antes de migrar as tabelas, certifique-se de criar a base de dados executando o comando:
+
+```bash
+npx sequelize-cli db:create
+```
+
+### Passo 4: Migrar as Tabelas
+
+Aplique as migrations para criar as tabelas no banco de dados:
+
+```bash
+npx sequelize-cli db:migrate
+```
+
+---

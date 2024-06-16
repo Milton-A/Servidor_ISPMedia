@@ -17,32 +17,6 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      id_media: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        // references: {
-        //   model: 'midia',
-        //   key: 'id_midia',
-        // },
-      },
-      id_compositor: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        // references: {
-        //   model: 'compositores',
-        //   key: 'id_compositor',
-        // },
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
     });
   },
 

@@ -12,10 +12,6 @@ module.exports = {
       id_usuario: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'usuario',
-        //   key: 'id_usuario',
-        // },
       },
       mensagem: {
         type: Sequelize.STRING(255),
@@ -26,20 +22,13 @@ module.exports = {
         allowNull: false,
         defaultValue: Sequelize.NOW,
       },
-      visualizacao: {
-        type: Sequelize.BOOLEAN,
+      destino: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: false,
       },
-      createdAt: {
-        type: Sequelize.DATE,
+      tipo: {
+        type: Sequelize.STRING(255),
         allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
       },
     });
   },

@@ -12,28 +12,10 @@ module.exports = {
       id_grupo: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        references: {
-          model: 'grupo',
-          key: 'id_grupo',
-        },
       },
       id_media: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        // references: {
-        //   model: 'midia',
-        //   key: 'id_midia',
-        // },
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
       },
     });
   },
