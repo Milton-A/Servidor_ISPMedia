@@ -26,7 +26,7 @@ class MidiaController {
   async list(req: Request, res: Response): Promise<void> {
     try {
       const midias = await Midia.findAll();
-      res.status(200).json(midias);
+      res.status(200).json({ message: "Midias concluída", data: midias });
     } catch (error) {
       console.error("Erro ao listar mídias:", error);
       res.status(500).json({ error: "Erro ao listar mídias" });
