@@ -13,7 +13,6 @@ class UserModel extends Model implements UserAttributes {
   id_usuario?: number;
   nome?: string;
   sobrenome?: string;
-  senha?: string;
   email?: string;
 }
 
@@ -30,10 +29,6 @@ UserModel.init(
     },
     sobrenome: {
       type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-    senha: {
-      type: DataTypes.STRING(255),
       allowNull: false,
     },
     email: {

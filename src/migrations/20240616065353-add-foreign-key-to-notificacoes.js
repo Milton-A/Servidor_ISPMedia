@@ -5,12 +5,12 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     // Adicionar a referência à tabela 'usuario' na coluna 'id_usuario'
     await queryInterface.addConstraint('notificacoes', {
-      fields: ['id_usuario'],
+      fields: ['id_perfil_usuario'],
       type: 'foreign key',
       name: 'fk_notificacoes_id_usuario',
       references: {
-        table: 'usuario',
-        field: 'id_usuario',
+        table: 'perfil_usuario',
+        field: 'id_perfil_usuario',
       },
       onDelete: 'cascade',
       onUpdate: 'cascade',

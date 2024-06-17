@@ -16,12 +16,12 @@ module.exports = {
       onUpdate: 'cascade',
     },
       {
-        fields: ['id_usuario'],
+        fields: ['id_perfil_usuario'],
         type: 'foreign key',
-        name: 'fk_partilhaUsuarioOwner_id_usuario',
+        name: 'fk_partilhaUsuarioOwner_id_perfil_usuario',
         references: {
-          table: 'usuario',
-          field: 'id_usuario',
+          table: 'perfil_usuario',
+          field: 'id_perfil_usuario',
         },
         onDelete: 'cascade',
         onUpdate: 'cascade',
@@ -33,8 +33,8 @@ module.exports = {
       type: 'foreign key',
       name: 'fk_partilha_id_receptor_usuario',
       references: {
-        table: 'usuario',
-        field: 'id_usuario',
+        table: 'perfil_usuario',
+        field: 'id_perfil_usuario',
       },
       onDelete: 'cascade',
       onUpdate: 'cascade',
@@ -47,6 +47,6 @@ module.exports = {
 
     // Remover a referência da coluna 'id_receptor_usuario'
     await queryInterface.removeConstraint('partilha', 'fk_partilha_id_receptor_usuario');
-    await queryInterface.removeConstraint('partilha', 'fk_partilhaUsuarioOwner_id_usuario');
+    await queryInterface.removeConstraint('partilha', 'fk_partilhaUsuarioOwner_id_perfil_usuario');
   }
 };

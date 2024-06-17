@@ -1,17 +1,13 @@
-// Importações do Sequelize e da conexão
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
 
-// Definição do modelo
 class PlaylistMedia extends Model {
-  // Campos da tabela
   id_playlist_media!: number;
   id_midia!: number;
   id_perfil_usuario!: number;
   id_playlist!: number;
 }
 
-// Inicialização do modelo
 PlaylistMedia.init(
   {
     id_playlist_media: {
@@ -36,9 +32,8 @@ PlaylistMedia.init(
     sequelize: connection,
     tableName: "playlist_media",
     timestamps: true,
-    underscored: true, // opcional: define que os nomes das colunas no banco de dados serão com snake_case
+    underscored: true,
   }
 );
 
-// Exportação do modelo
 export default PlaylistMedia;

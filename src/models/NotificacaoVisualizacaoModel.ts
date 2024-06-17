@@ -3,7 +3,7 @@ import connection from "../database/index";
 
 class NotificacaoVisualizacaoModel extends Model {
   id_notificacao_visualizacao!: number;
-  id_usuario!: number;
+  id_perfil_usuario!: number;
   data_visualizacao!: Date;
   id_notificacao!: number;
 }
@@ -16,7 +16,7 @@ NotificacaoVisualizacaoModel.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    id_usuario: {
+    id_perfil_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },

@@ -5,12 +5,12 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     // Adicionar a referência à tabela 'usuario' na coluna 'id_usuario'
     await queryInterface.addConstraint('criticas', {
-      fields: ['id_usuario'],
+      fields: ['id_perfil_usuario'],
       type: 'foreign key',
-      name: 'fk_criticas_id_usuario',
+      name: 'fk_criticas_id_perfil_usuario',
       references: {
-        table: 'usuario',
-        field: 'id_usuario',
+        table: 'perfil_usuario',
+        field: 'id_perfil_usuario',
       },
       onDelete: 'cascade',
       onUpdate: 'cascade',
@@ -32,7 +32,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     // Remover a referência da coluna 'id_usuario'
-    await queryInterface.removeConstraint('criticas', 'fk_criticas_id_usuario');
+    await queryInterface.removeConstraint('criticas', 'fk_criticas_id_perfil_usuario');
 
     // Remover a referência da coluna 'id_midia'
     await queryInterface.removeConstraint('criticas', 'fk_criticas_id_midia');

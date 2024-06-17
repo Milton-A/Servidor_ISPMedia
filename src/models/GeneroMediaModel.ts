@@ -4,18 +4,11 @@ import connection from "../database/index";
 interface GeneroMediaAttributes {
   id_genero_media?: number;
   nome: string;
-  createdAt?: Date;
-  updatedAt?: Date;
 }
 
-class GeneroMedia
-  extends Model<GeneroMediaAttributes>
-  implements GeneroMediaAttributes
-{
-  public id_genero_media!: number;
-  public nome!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+class GeneroMedia extends Model implements GeneroMediaAttributes {
+  id_genero_media!: number;
+  nome!: string;
 }
 
 GeneroMedia.init(
@@ -28,16 +21,6 @@ GeneroMedia.init(
     nome: {
       type: DataTypes.STRING(100),
       allowNull: false,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
   },
   {

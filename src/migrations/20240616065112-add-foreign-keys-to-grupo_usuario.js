@@ -18,12 +18,12 @@ module.exports = {
 
     // Adicionar a referência à tabela 'usuario' na coluna 'id_usuario'
     await queryInterface.addConstraint('grupo_usuario', {
-      fields: ['id_usuario'],
+      fields: ['id_perfil_usuario'],
       type: 'foreign key',
       name: 'fk_grupo_usuario_id_usuario',
       references: {
-        table: 'usuario',
-        field: 'id_usuario',
+        table: 'perfil_usuario',
+        field: 'id_perfil_usuario',
       },
       onDelete: 'cascade',
       onUpdate: 'cascade',

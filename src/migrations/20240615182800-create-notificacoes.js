@@ -9,7 +9,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      id_usuario: {
+      id_perfil_usuario: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
       },

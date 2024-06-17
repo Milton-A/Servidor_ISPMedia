@@ -3,28 +3,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('notificacao_visualizacao', {
-      id_usuario: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'usuario',
-          key: 'id_usuario',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+    await queryInterface.addConstraint('notificacoes', {
+      fields: ['id_perfil_usuario'],
+      type: 'foreign key',
+      name: 'fk_notificacoes_id_usuario',
+      references: {
+        table: 'perfil_usuario',
+        field: 'id_perfil_usuario',
       },
-      id_notificacao: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    },
+      {
+        fields: ['id_notificacao'],
+        type: 'foreign key',
+        name: 'fk_id_notificacao',
         references: {
-          model: 'notificacoes',
-          key: 'id_notificacao',
+          table: 'notificacoes',
+          field: 'id_notificacao',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-    });
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+      });
   },
 
   async down(queryInterface, Sequelize) {

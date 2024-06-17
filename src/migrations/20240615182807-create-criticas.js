@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      id_usuario: {
+      id_perfil_usuario: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
       },

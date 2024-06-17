@@ -4,14 +4,14 @@ import connection from "../database/index";
 interface CriticaAttributes {
   id_critica?: number;
   descricao?: string;
-  id_usuario?: number;
+  id_perfil_usuario?: number;
   id_midia?: number;
 }
 
 class Critica extends Model implements CriticaAttributes {
   id_critica?: number;
   descricao?: string;
-  id_usuario?: number;
+  id_perfil_usuario?: number;
   id_midia?: number;
 }
 
@@ -26,7 +26,7 @@ Critica.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    id_usuario: {
+    id_perfil_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },

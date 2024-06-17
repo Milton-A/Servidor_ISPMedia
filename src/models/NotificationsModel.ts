@@ -1,19 +1,15 @@
-// Importações do Sequelize e da conexão
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
 
-// Definição do modelo
 class Notificacao extends Model {
-  // Campos da tabela
   id_notificacao!: number;
-  id_usuario!: number;
+  id_perfil_usuario!: number;
   mensagem!: string;
   data_envio!: Date;
   destino!: number;
   tipo!: string;
 }
 
-// Inicialização do modelo
 Notificacao.init(
   {
     id_notificacao: {
@@ -21,7 +17,7 @@ Notificacao.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    id_usuario: {
+    id_perfil_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
@@ -47,9 +43,8 @@ Notificacao.init(
     sequelize: connection,
     tableName: "notificacoes",
     timestamps: true,
-    underscored: true, // opcional: define que os nomes das colunas no banco de dados serão com snake_case
+    underscored: true,
   }
 );
 
-// Exportação do modelo
 export default Notificacao;

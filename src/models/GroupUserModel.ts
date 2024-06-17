@@ -4,7 +4,7 @@ import connection from "../database/index";
 interface GrupoUsuarioAttributes {
   id_grupo_usuario?: number;
   id_grupo: number;
-  id_usuario: number;
+  id_perfil_usuario: number;
   id_papel_usuario_grupo: number;
   data_entrada: Date;
 }
@@ -12,7 +12,7 @@ interface GrupoUsuarioAttributes {
 class GrupoUsuario extends Model implements GrupoUsuarioAttributes {
   id_grupo_usuario!: number;
   id_grupo!: number;
-  id_usuario!: number;
+  id_perfil_usuario!: number;
   id_papel_usuario_grupo!: number;
   data_entrada!: Date;
 }
@@ -28,7 +28,7 @@ GrupoUsuario.init(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
-    id_usuario: {
+    id_perfil_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },

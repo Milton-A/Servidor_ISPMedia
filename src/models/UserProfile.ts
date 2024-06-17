@@ -7,6 +7,7 @@ class UserProfile extends Model {
   username!: string;
   avatar!: string | null;
   bio!: string | null;
+  senha?: string;
 }
 
 UserProfile.init(
@@ -32,6 +33,10 @@ UserProfile.init(
     bio: {
       type: DataTypes.TEXT,
       allowNull: true,
+    },
+    senha: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
     },
   },
   {

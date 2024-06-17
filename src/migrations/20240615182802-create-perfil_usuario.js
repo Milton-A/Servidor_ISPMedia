@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      senha: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+      },
     });
   },
 
