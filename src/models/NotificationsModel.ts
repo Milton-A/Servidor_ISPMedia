@@ -43,7 +43,6 @@ Notificacao.init(
     sequelize: connection,
     tableName: "notificacoes",
     timestamps: true,
-    underscored: true,
   }
 );
 

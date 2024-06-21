@@ -32,7 +32,6 @@ PlaylistMedia.init(
     sequelize: connection,
     tableName: "playlist_media",
     timestamps: true,
-    underscored: true,
   }
 );
 

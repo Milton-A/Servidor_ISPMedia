@@ -46,7 +46,6 @@ Partilha.init(
     sequelize: connection,
     tableName: "partilha",
     timestamps: true,
-    underscored: true,
   }
 );
 

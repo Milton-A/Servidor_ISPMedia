@@ -27,7 +27,6 @@ TipoMedia.init(
     sequelize: connection,
     tableName: "tipo_media",
     timestamps: true,
-    underscored: true,
   }
 );
 

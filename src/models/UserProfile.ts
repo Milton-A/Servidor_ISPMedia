@@ -5,9 +5,9 @@ class UserProfile extends Model {
   id_perfil_usuario!: number;
   id_usuario!: number;
   username!: string;
-  avatar!: string | null;
+  avatar?: string | null;
   bio!: string | null;
-  senha?: string;
+  senha!: string;
 }
 
 UserProfile.init(
@@ -43,7 +43,6 @@ UserProfile.init(
     sequelize: connection,
     tableName: "perfil_usuario",
     timestamps: true,
-    underscored: true,
   }
 );
 

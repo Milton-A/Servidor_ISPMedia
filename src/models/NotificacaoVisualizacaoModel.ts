@@ -34,7 +34,6 @@ NotificacaoVisualizacaoModel.init(
     sequelize: connection,
     tableName: "notificacao_visualizacao",
     timestamps: true,
-    underscored: true, // opcional: define que os nomes das colunas no banco de dados serão com snake_case
   }
 );
 
