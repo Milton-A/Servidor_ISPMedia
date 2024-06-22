@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserModel from "../models/UserModel";
+import { SendEmail } from "../services/sendMail";
 
 class UserController {
   /**
@@ -11,6 +12,7 @@ class UserController {
     try {
       const novoUsuario = req.body;
       const usuarioCriado = await UserModel.create(novoUsuario);
+      SendEmail(novoUsuario.email);
       res.status(201).json(usuarioCriado);
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
