@@ -120,7 +120,7 @@ class UserProfileController {
         return; // Exit function after sending response
       }
 
-      // const isPasswordValid = await checkPassword(senha, user.senha);
+      const isPasswordValid = await checkPassword(senha, user.senha);
 
       if (!user) {
         res.status(401).json({ error: "Credenciais inválidas" });
