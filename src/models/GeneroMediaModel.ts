@@ -27,7 +27,6 @@ GeneroMedia.init(
     sequelize: connection,
     tableName: "genero_media",
     timestamps: true,
-    underscored: true,
   }
 );
 

@@ -1,5 +1,23 @@
 import { Request, Response } from "express";
 import UserProfile from "../models/UserProfile";
+import bcrypt from "bcrypt";
+const saltRounds = 10;
+
+interface AuthenticatedRequest extends Request {
+  user?: { id: string; username: string };
+}
+
+const checkPassword = async (senha: string, hash: string) => {
+  await bcrypt.compare(senha, hash, function (err, result) {
+    return result;
+  });
+};
+
+const generatePassword = (senha: string) => {
+  bcrypt.hash(senha, saltRounds, function (err, hash) {
+    return hash;
+  });
+};
 
 class UserProfileController {
   /**
@@ -10,6 +28,8 @@ class UserProfileController {
   async create(req: Request, res: Response): Promise<void> {
     try {
       const novoPerfil = req.body;
+      novoPerfil.senha = generatePassword(novoPerfil.senha);
+
       const perfilCriado = await UserProfile.create(novoPerfil);
       res.status(201).json(perfilCriado);
     } catch (error) {
@@ -102,6 +122,34 @@ class UserProfileController {
       res
         .status(500)
         .json({ error: "Erro ao excluir perfil de usuário por ID" });
+    }
+  }
+
+  /**
+   * Realiza o login do usuário
+   * @param req Request com as credenciais do usuário
+   * @param res Response para enviar a resposta HTTP
+   */
+  async login(req: Request, res: Response): Promise<void> {
+    const { username, senha } = req.body;
+    try {
+      const user: UserProfile | null = await UserProfile.findOne({
+        where: { username },
+      });
+      if (!user) {
+        res.status(401).json({ error: "Credenciais inválidas" });
+      }
+
+      const isPasswordValid = checkPassword(senha, user ? user.senha : "");
+
+      if (!isPasswordValid) {
+        res.status(401).json({ error: "Credenciais inválidas" });
+      } else {
+        res.status(200).json({ status: 200, message: "OK", data: user });
+      }
+    } catch (error) {
+      console.error("Erro ao realizar login:", error);
+      res.status(500).json({ error: "Erro ao realizar login" });
     }
   }
 }
