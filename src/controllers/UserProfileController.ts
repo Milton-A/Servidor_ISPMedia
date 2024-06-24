@@ -8,13 +8,22 @@ interface AuthenticatedRequest extends Request {
 }
 
 const checkPassword = async (senha: string, hash: string) => {
-  await bcrypt.compare(senha, hash, function (err, result) {
+  try {
+    const result = await bcrypt.compare(senha, hash);
+    // Aqui 'result' é do tipo 'boolean'
+    if (result) {
+      console.log("As senhas coincidem!");
+    } else {
+      console.log("As senhas não coincidem!");
+    }
     return result;
-  });
+  } catch (error) {
+    console.error("Erro ao comparar senhas:", error);
+  }
 };
 
 const generatePassword = (senha: string) => {
-  bcrypt.hash(senha, saltRounds, function (err, hash) {
+  bcrypt.hash(senha, saltRounds, (hash) => {
     return hash;
   });
 };
