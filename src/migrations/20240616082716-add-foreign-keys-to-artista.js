@@ -3,20 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('artista', {
-      id_editora: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'editora',
-          key: 'id_editora',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+    await queryInterface.addConstraint('artista', {
+      fields: ['id_editora'],
+      type: 'foreign key',
+      name: 'fk_editora_id_editora',
+      references: {
+        table: 'editora',
+        field: 'id_editora',
       },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeConstraint('artista', 'fk_editora_id_editora');
   }
 };

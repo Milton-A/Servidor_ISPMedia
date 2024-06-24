@@ -3,78 +3,67 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('midia', {
-      id_midia: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        autoIncrement: true,
-        primaryKey: true,
+    await queryInterface.addConstraint('midia', {
+      fields: ['id_formato_media'],
+      type: 'foreign key',
+      name: 'fk_formato_media_id_formato_media',
+      references: {
+        table: 'formato_media',
+        field: 'id_formato_media',
       },
-      titulo: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
+
+    await queryInterface.addConstraint('midia', {
+      fields: ['id_perfil_usuario'],
+      type: 'foreign key',
+      name: 'fk_id_perfil_usuario',
+      references: {
+        table: 'perfil_usuario',
+        field: 'id_perfil_usuario',
       },
-      id_formato_media: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'formato_media',
-          key: 'id_formato_media',
-        },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
+
+    await queryInterface.addConstraint('midia', {
+      fields: ['id_legenda'],
+      type: 'foreign key',
+      name: 'fk_legendas_id_legenda',
+      references: {
+        table: 'legendas',
+        field: 'id_legendas',
       },
-      id_autor: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'autor',
-          key: 'id_autor',
-        },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
+
+    await queryInterface.addConstraint('midia', {
+      fields: ['id_genero_media'],
+      type: 'foreign key',
+      name: 'fk_genero_media_id_genero_media',
+      references: {
+        table: 'genero_media',
+        field: 'id_genero_media',
       },
-      id_musico: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'musico',
-          key: 'id_musico',
-        },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
+
+    await queryInterface.addConstraint('midia', {
+      fields: ['id_tipo_media'],
+      type: 'foreign key',
+      name: 'fk_id_tipo_media',
+      references: {
+        table: 'tipo_media',
+        field: 'id_tipo_media',
       },
-      id_midia_artista: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'midia_artista',
-          key: 'id_midia_artista',
-        },
-      },
-      id_midia_compositor: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'midia_compositor',
-          key: 'id_midia_compositor',
-        },
-      },
-      estado: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },
-      imagem: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('midia');
   }
 };

@@ -3,47 +3,38 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('playlist_media', {
-      id_midia: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'midia',
-          key: 'id_midia',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+    await queryInterface.addConstraint('playlist_media', {
+      fields: ['id_midia'],
+      type: 'foreign key',
+      name: 'fk_playlist_media_id_midia',
+      references: {
+        table: 'midia',
+        field: 'id_midia',
       },
-      id_perfil_usuario: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'perfil_usuario',
-          key: 'id_perfil_usuario',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
+    await queryInterface.addConstraint('playlist_media', {
+      fields: ['id_perfil_usuario'],
+      type: 'foreign key',
+      name: 'fk_playlist_media_id_perfil_usuario',
+      references: {
+        table: 'perfil_usuario',
+        field: 'id_perfil_usuario',
       },
-      id_playlist: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        references: {
-          model: 'playlist',
-          key: 'id_playlist',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
+    await queryInterface.addConstraint('playlist_media', {
+      fields: ['id_playlist'],
+      type: 'foreign key',
+      name: 'fk_playlist_media_id_playlist',
+      references: {
+        table: 'playlist',
+        field: 'id_playlist',
       },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   },
 

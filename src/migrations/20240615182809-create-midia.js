@@ -46,8 +46,8 @@ module.exports = {
         allowNull: false,
       },
       id_perfil_usuario: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
       },
       estado: {
         type: Sequelize.BOOLEAN,
