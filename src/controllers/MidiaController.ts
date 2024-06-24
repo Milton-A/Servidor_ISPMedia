@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import Midia from "../models/MidiaModel";
+import path from "path";
+const fs = require("fs");
 
 class MidiaController {
   /**
@@ -74,6 +76,16 @@ class MidiaController {
     } catch (error) {
       console.error("Erro ao atualizar mídia por ID:", error);
       res.status(500).json({ error: "Erro ao atualizar mídia por ID" });
+    }
+  }
+
+  async stream(req: Request, res: Response): Promise<void> {
+    try {
+      const videoPath = "output_dash/output.mpd";
+      res.sendFile(videoPath, { root: "public/" });
+    } catch (err) {
+      console.error("Error during streaming:", err);
+      res.status(500).send("Server error");
     }
   }
 

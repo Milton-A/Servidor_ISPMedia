@@ -7,6 +7,7 @@ router.get("/", MidiaController.list);
 router.post("/create", MidiaController.create);
 router.put("/update/:id", MidiaController.update);
 router.get("/getGroup/:id", MidiaController.findById);
+router.get("/video", MidiaController.stream);
 router.delete("/delete/:id", MidiaController.delete);
 
 export default router;

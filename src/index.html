@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.7.4/dash.all.min.js"></script>
+    <title>Streaming de Vídeo</title>
+</head>
+<body>
+    <div>
+        <h1>Reprodução de Vídeo</h1>
+        <video data-dashjs-player controls autoplay>
+            <source src="/output_dash/output.mpd" type="application/dash+xml">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</body>
+</html>
