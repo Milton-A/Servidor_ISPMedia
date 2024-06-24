@@ -7,37 +7,29 @@ interface AuthenticatedRequest extends Request {
   user?: { id: string; username: string };
 }
 
-const checkPassword = async (senha: string, hash: string) => {
-  try {
-    const result = await bcrypt.compare(senha, hash);
-    // Aqui 'result' é do tipo 'boolean'
-    if (result) {
-      console.log("As senhas coincidem!");
-    } else {
-      console.log("As senhas não coincidem!");
-    }
-    return result;
-  } catch (error) {
-    console.error("Erro ao comparar senhas:", error);
-  }
+const checkPassword = async (senha: string, hash: string): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(senha, hash, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
 };
 
-const generatePassword = (senha: string) => {
-  bcrypt.hash(senha, saltRounds, (hash) => {
-    return hash;
+const generatePassword = (senha: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(senha, saltRounds, (err, hash) => {
+      if (err) reject(err);
+      resolve(hash);
+    });
   });
 };
 
 class UserProfileController {
-  /**
-   * Cria um novo perfil de usuário
-   * @param req Request com os dados do perfil de usuário a ser criado
-   * @param res Response para enviar a resposta HTTP
-   */
   async create(req: Request, res: Response): Promise<void> {
     try {
       const novoPerfil = req.body;
-      novoPerfil.senha = generatePassword(novoPerfil.senha);
+      novoPerfil.senha = await generatePassword(novoPerfil.senha);
 
       const perfilCriado = await UserProfile.create(novoPerfil);
       res.status(201).json(perfilCriado);
@@ -47,11 +39,6 @@ class UserProfileController {
     }
   }
 
-  /**
-   * Lista todos os perfis de usuários
-   * @param req Request com os parâmetros da requisição (opcional)
-   * @param res Response para enviar a resposta HTTP
-   */
   async list(req: Request, res: Response): Promise<void> {
     try {
       const perfis: UserProfile[] = await UserProfile.findAll();
@@ -62,11 +49,6 @@ class UserProfileController {
     }
   }
 
-  /**
-   * Busca um perfil de usuário por ID
-   * @param req Request com o ID do perfil de usuário a ser buscado
-   * @param res Response para enviar a resposta HTTP
-   */
   async findById(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
@@ -84,21 +66,19 @@ class UserProfileController {
     }
   }
 
-  /**
-   * Atualiza um perfil de usuário existente por ID
-   * @param req Request com o ID do perfil de usuário a ser atualizado e os novos dados
-   * @param res Response para enviar a resposta HTTP
-   */
   async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const novosDadosPerfil = req.body;
     try {
-      const perfilAtualizado = await UserProfile.update(novosDadosPerfil, {
-        where: { id_perfil_usuario: id },
-        returning: true,
-      });
-      if (perfilAtualizado[0] === 1) {
-        res.status(200).json(perfilAtualizado[1][0]);
+      const [updatedCount, updatedProfiles] = await UserProfile.update(
+        novosDadosPerfil,
+        {
+          where: { id_perfil_usuario: id },
+          returning: true,
+        }
+      );
+      if (updatedCount === 1) {
+        res.status(200).json(updatedProfiles[0]);
       } else {
         res.status(404).json({ error: "Perfil de usuário não encontrado" });
       }
@@ -110,11 +90,6 @@ class UserProfileController {
     }
   }
 
-  /**
-   * Exclui um perfil de usuário por ID
-   * @param req Request com o ID do perfil de usuário a ser excluído
-   * @param res Response para enviar a resposta HTTP
-   */
   async delete(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
@@ -134,11 +109,6 @@ class UserProfileController {
     }
   }
 
-  /**
-   * Realiza o login do usuário
-   * @param req Request com as credenciais do usuário
-   * @param res Response para enviar a resposta HTTP
-   */
   async login(req: Request, res: Response): Promise<void> {
     const { username, senha } = req.body;
     try {
@@ -147,11 +117,12 @@ class UserProfileController {
       });
       if (!user) {
         res.status(401).json({ error: "Credenciais inválidas" });
+        return; // Exit function after sending response
       }
 
-      const isPasswordValid = checkPassword(senha, user ? user.senha : "");
+      const isPasswordValid = await checkPassword(senha, user.senha);
 
-      if (!isPasswordValid) {
+      if (!user) {
         res.status(401).json({ error: "Credenciais inválidas" });
       } else {
         res.status(200).json({ status: 200, message: "OK", data: user });

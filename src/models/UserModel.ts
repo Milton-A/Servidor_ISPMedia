@@ -5,7 +5,6 @@ export interface UserAttributes {
   id_usuario?: number;
   nome?: string;
   sobrenome?: string;
-  senha?: string;
   email?: string;
 }
 
