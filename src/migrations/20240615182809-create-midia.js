@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
+      imagem: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
       id_formato_media: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
@@ -46,8 +50,8 @@ module.exports = {
         allowNull: false,
       },
       id_perfil_usuario: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
       },
       estado: {
         type: Sequelize.BOOLEAN,

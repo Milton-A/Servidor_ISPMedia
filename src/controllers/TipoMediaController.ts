@@ -26,7 +26,7 @@ class TipoMediaController {
   async list(req: Request, res: Response): Promise<void> {
     try {
       const tiposMedia = await TipoMedia.findAll();
-      res.status(200).json(tiposMedia);
+      res.status(200).json({ message: "Tipos concluída", data: tiposMedia });
     } catch (error) {
       console.error("Erro ao listar tipos de mídia:", error);
       res.status(500).json({ error: "Erro ao listar tipos de mídia" });
