@@ -14,9 +14,11 @@ interface MidiaAttributes {
   data: string;
   id_perfil_usuario?: string | null;
   estado: boolean;
+  imagem: string;
 }
 
 class Midia extends Model implements MidiaAttributes {
+  public imagem!: string;
   public id_midia!: number;
   public titulo!: string;
   public id_legenda!: number;

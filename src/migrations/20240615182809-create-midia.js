@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
+      imagem: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
       id_formato_media: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
