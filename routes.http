@@ -5,6 +5,9 @@ GET http://localhost:3003/user
 ###
 # @name create-user
 GET http://localhost:3003/groupUser/getByUserId/1
+###
+# @name get-midiaByUserId
+GET http://localhost:3003/playlistMidia/getByUserId/1
 
 ###
 # @name create-group
@@ -17,7 +20,7 @@ Content-Type: application/json
   "tipo": "string"
 }
 ###
-# @name create-groupUser
+# @name create-userProfile
 POST http://localhost:3003/userProfile/create
 Content-Type: application/json
 
@@ -66,6 +69,17 @@ Content-Type: application/json
   "email": "20201063@isptec.co.ao"
 }
 ###
+# @name create-playlistMedia
+POST http://localhost:3003/playlistMidia/create
+Content-Type: application/json
+
+{
+     
+  "id_midia": 2,
+  "id_perfil_usuario": 1,
+  "id_playlist": 1
+}
+###
 # @name create-playlist
 POST http://localhost:3003/playlist/create
 Content-Type: application/json
@@ -79,12 +93,12 @@ Content-Type: application/json
 }
 ###
 # @name create-media
-POST http://localhost:3003/media/create
+POST http://localhost:3003/midia/create
 Content-Type: application/json
 
 {
      
-  "titulo": "string",
+  "titulo": "strin2g",
   "id_legenda": 1,
   "id_genero_media": 1,
   "id_tipo_media": 1,

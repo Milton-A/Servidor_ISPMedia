@@ -1,5 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
+import UserProfile from "./UserProfile";
+import Midia from "./MidiaModel";
+import Playlist from "./PlaylistModel";
 
 class PlaylistMedia extends Model {
   id_playlist_media!: number;
@@ -34,5 +37,17 @@ PlaylistMedia.init(
     timestamps: true,
   }
 );
+PlaylistMedia.belongsTo(Midia, {
+  foreignKey: "id_midia",
+  as: "midia",
+});
+PlaylistMedia.belongsTo(UserProfile, {
+  foreignKey: "id_perfil_usuario",
+  as: "perfil_usuario",
+});
+PlaylistMedia.belongsTo(Playlist, {
+  foreignKey: "id_playlist",
+  as: "playlist",
+});
 
 export default PlaylistMedia;

@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-app.listen(3333, () => {
+app.listen(3003, () => {
   console.log(`Server is running on port 3003`);
 });
 

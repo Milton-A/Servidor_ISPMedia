@@ -1,6 +1,17 @@
 import { Request, Response } from "express";
 import PlaylistMedia from "../models/PlaylistMidiaModel";
+import Playlist from "../models/PlaylistModel";
 
+type PlaylistMidia = {
+  id_playlist_media: number;
+  id_midia: number;
+  id_perfil_usuario: number;
+  id_playlist: number;
+  playlist: {
+    nome: string;
+  };
+  updatedAt: Date; // Add updatedAt if it's required
+};
 class PlaylistMediaController {
   /**
    * Cria uma nova associação entre mídia e playlist
@@ -93,7 +104,43 @@ class PlaylistMediaController {
       });
     }
   }
+  async getUserById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const grupoUsuario = await PlaylistMedia.findAll({
+        where: { id_perfil_usuario: id },
+        include: [
+          {
+            model: Playlist,
+            as: "playlist",
+            attributes: ["nome"],
+          },
+        ],
+      });
+      const playlistsUnicas: { [key: string]: PlaylistMidia } = {};
+      grupoUsuario.forEach((item) => {
+        const playlistNome = item.dataValues.playlist.nome;
+        if (!playlistsUnicas[playlistNome]) {
+          playlistsUnicas[playlistNome] = {
+            ...item.dataValues,
+            playlist: item.dataValues.playlist,
+            updatedAt: item.dataValues.updatedAt, // Ensure this is set
+          };
+        }
+      });
 
+      const resultadoFinal = Object.values(playlistsUnicas);
+
+      if (grupoUsuario) {
+        res.status(200).json(resultadoFinal);
+      } else {
+        res.status(404).json({ error: "Grupo de usuário não encontrado" });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar grupo de usuário por ID:", error);
+      res.status(500).json(`${error}: Erro ao buscar grupo de usuário por ID`);
+    }
+  }
   /**
    * Exclui uma associação entre mídia e playlist por ID
    * @param req Request com o ID da associação a ser excluída
