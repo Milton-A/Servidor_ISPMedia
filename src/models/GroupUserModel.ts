@@ -1,5 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
+import GroupModel from "./GroupModel";
+import UserProfile from "./UserProfile";
 
 interface GrupoUsuarioAttributes {
   id_grupo_usuario?: number;
@@ -48,5 +50,12 @@ GrupoUsuario.init(
     timestamps: true,
   }
 );
-
+GrupoUsuario.belongsTo(GroupModel, {
+  foreignKey: "id_grupo",
+  as: "grupo",
+});
+GrupoUsuario.belongsTo(UserProfile, {
+  foreignKey: "id_perfil_usuario",
+  as: "perfil_usuario",
+});
 export default GrupoUsuario;

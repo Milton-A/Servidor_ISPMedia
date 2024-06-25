@@ -1,10 +1,61 @@
 
 # @name create-user
-GET http://localhost:3000/user
+GET http://localhost:3003/user
 
 ###
 # @name create-user
-POST http://localhost:3333/user/create
+GET http://localhost:3003/groupUser/getByUserId/1
+
+###
+# @name create-group
+POST http://localhost:3003/group/create
+Content-Type: application/json
+
+{   
+  "nome": "string1",
+  "estado": "string",
+  "tipo": "string"
+}
+###
+# @name create-groupUser
+POST http://localhost:3003/userProfile/create
+Content-Type: application/json
+
+{
+     
+   "id_usuario": 1,
+  "username": "string",
+  "avatar": "string",
+  "bio": "string",
+  "senha": "string"
+}
+###
+# @name create-groupUser
+POST http://localhost:3003/groupUser/create
+Content-Type: application/json
+
+{
+     
+  "id_grupo": 2,
+  "id_perfil_usuario": 1,
+  "id_papel_usuario_grupo": 1,
+  "data_entrada": "2024-06-25 13:23:05"
+}
+###
+# @name create-groupUser
+POST http://localhost:3003/groupUser/create
+Content-Type: application/json
+
+{
+     
+  "id_grupo": 1,
+  "id_perfil_usuario": 1,
+  "id_papel_usuario_grupo": 1,
+  "data_entrada": "2024-06-25 13:23:05"
+}
+###
+# @name create-user
+POST http://localhost:3003/user/create
 Content-Type: application/json
 
 {
@@ -13,6 +64,79 @@ Content-Type: application/json
   "sobrenome": "string",
   "senha": "string",
   "email": "20201063@isptec.co.ao"
+}
+###
+# @name create-playlist
+POST http://localhost:3003/playlist/create
+Content-Type: application/json
+
+{
+     
+  "nome": "string",
+  "data": "2024-06-25 13:23:05",
+  "visibilidade": "string",
+  "estado": false
+}
+###
+# @name create-media
+POST http://localhost:3003/media/create
+Content-Type: application/json
+
+{
+     
+  "titulo": "string",
+  "id_legenda": 1,
+  "id_genero_media": 1,
+  "id_tipo_media": 1,
+  "duracao": "string",
+  "arquivo": "string",
+  "id_formato_media": 1,
+  "tamanho": "erer",
+  "data": "",
+  "id_perfil_usuario": 1,
+  "estado": true
+}
+###
+# @name create-media
+POST http://localhost:3003/legenda/create
+Content-Type: application/json
+
+{
+  "arquivo": "string",
+   "estado": "string"
+
+}
+###
+# @name create-generoMedia
+POST http://localhost:3003/genero/create
+Content-Type: application/json
+
+{
+  "nome": "string"
+}
+###
+# @name create-generoMedia
+POST http://localhost:3003/tipoMidia/create
+Content-Type: application/json
+
+{
+  "nome": "string"
+}
+###
+# @name create-generoMedia
+POST http://localhost:3003/formatoMedia/create
+Content-Type: application/json
+
+{
+  "nome": "string"
+}
+###
+# @name create-generoMedia
+POST http://localhost:3003/formatoMedia/create
+Content-Type: application/json
+
+{
+  "nome": "string"
 }
 ###
 POST http://localhost:3000/Album

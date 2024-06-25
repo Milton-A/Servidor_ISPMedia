@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import GrupoUsuario from "../models/GroupUserModel";
+import GroupModel from "../models/GroupModel";
 
 class GrupoUsuarioController {
   /**
@@ -14,7 +15,7 @@ class GrupoUsuarioController {
       res.status(201).json(grupoUsuarioCriado);
     } catch (error) {
       console.error("Erro ao criar grupo de usuário:", error);
-      res.status(500).json({ error: "Erro ao criar grupo de usuário" });
+      res.status(500).json(error);
     }
   }
 
@@ -29,7 +30,7 @@ class GrupoUsuarioController {
       res.status(200).json(gruposUsuarios);
     } catch (error) {
       console.error("Erro ao listar grupos de usuários:", error);
-      res.status(500).json({ error: "Erro ao listar grupos de usuários" });
+      res.status(500).json(`${error}: Erro ao listar grupos de usuários`);
     }
   }
 
@@ -53,6 +54,30 @@ class GrupoUsuarioController {
     }
   }
 
+  async getUserById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const grupoUsuario = await GrupoUsuario.findAll({
+        where: { id_perfil_usuario: id },
+        include: [
+          {
+            model: GroupModel,
+            as: "grupo",
+            attributes: ["nome"],
+          },
+        ],
+      });
+
+      if (grupoUsuario) {
+        res.status(200).json(grupoUsuario);
+      } else {
+        res.status(404).json({ error: "Grupo de usuário não encontrado" });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar grupo de usuário por ID:", error);
+      res.status(500).json(`${error}: Erro ao buscar grupo de usuário por ID`);
+    }
+  }
   /**
    * Atualiza um grupo de usuário existente por ID
    * @param req Request com o ID do grupo de usuário a ser atualizado e os novos dados

@@ -12,7 +12,7 @@ interface MidiaAttributes {
   id_formato_media: number;
   tamanho: string;
   data: string;
-  id_perfil_usuario?: string | null;
+  id_perfil_usuario?: number | null;
   estado: boolean;
 }
 
@@ -27,7 +27,7 @@ class Midia extends Model implements MidiaAttributes {
   public id_formato_media!: number;
   public tamanho!: string;
   public data!: string;
-  public id_perfil_usuario?: string | null;
+  public id_perfil_usuario?: number | null;
   public estado!: boolean;
 }
 
@@ -75,7 +75,7 @@ Midia.init(
       allowNull: false,
     },
     id_perfil_usuario: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: true,
     },
     estado: {
