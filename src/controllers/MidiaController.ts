@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import Midia from "../models/MidiaModel";
 import { MidiaDTO } from "../utils/Types";
+import UserProfile from "../models/UserProfile";
+import Legenda from "../models/LegendaModel";
+import GeneroMedia from "../models/GeneroMediaModel";
+import TipoMedia from "../models/TipoMediaModel";
+import FormatoMedia from "../models/FormatoMidia";
 
 class MidiaController {
   /**
@@ -31,8 +36,33 @@ class MidiaController {
    */
   async list(req: Request, res: Response): Promise<void> {
     try {
-      const midias = await Midia.findAll();
-      res.status(200).json({ message: "Midias concluída", data: midias });
+      const midias = await Midia.findAll({
+        include: [
+          {
+            model: FormatoMedia,
+            as: "formatoMedia",
+          },
+          {
+            model: UserProfile,
+            as: "perfilUsuario",
+          },
+          {
+            model: Legenda,
+            as: "legenda",
+          },
+          {
+            model: GeneroMedia,
+            as: "generoMedia",
+          },
+          {
+            model: TipoMedia,
+            as: "tipoMedia",
+          },
+        ],
+      });
+      res
+        .status(200)
+        .json({ message: "Mídias listadas com sucesso", data: midias });
     } catch (error) {
       console.error("Erro ao listar mídias:", error);
       res.status(500).json({ error: "Erro ao listar mídias" });

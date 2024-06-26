@@ -1,5 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
+import FormatoMedia from "./FormatoMidia";
+import UserProfile from "./UserProfile";
+import Legenda from "./LegendaModel";
+import GeneroMedia from "./GeneroMediaModel";
+import TipoMedia from "./TipoMediaModel";
 
 interface MidiaAttributes {
   id_midia?: number;
@@ -17,7 +22,7 @@ interface MidiaAttributes {
   imagem: string;
 }
 
-class Midia extends Model implements MidiaAttributes {
+class Midia extends Model<MidiaAttributes> implements MidiaAttributes {
   public imagem!: string;
   public id_midia!: number;
   public titulo!: string;
@@ -85,6 +90,7 @@ Midia.init(
       allowNull: false,
       defaultValue: false,
     },
+    imagem: "",
   },
   {
     sequelize: connection,
@@ -92,5 +98,20 @@ Midia.init(
     timestamps: true,
   }
 );
+
+Midia.belongsTo(FormatoMedia, {
+  foreignKey: "id_formato_media",
+  as: "formatoMedia",
+});
+Midia.belongsTo(UserProfile, {
+  foreignKey: "id_perfil_usuario",
+  as: "perfilUsuario",
+});
+Midia.belongsTo(Legenda, { foreignKey: "id_legenda", as: "legenda" });
+Midia.belongsTo(GeneroMedia, {
+  foreignKey: "id_genero_media",
+  as: "generoMedia",
+});
+Midia.belongsTo(TipoMedia, { foreignKey: "id_tipo_media", as: "tipoMedia" });
 
 export default Midia;
