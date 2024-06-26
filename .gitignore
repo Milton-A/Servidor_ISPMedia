@@ -8,7 +8,8 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # Uploads
-plugins/output_dash
+public/output_dash
+public/uploads
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
