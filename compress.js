@@ -3,27 +3,27 @@ const ffmpeg = require("fluent-ffmpeg");
 
 ffmpeg.setFfmpegPath(ffmpegStatic);
 let inputPath = "test.mp4";
-const outputPath = "output_dash/output.mpd";
+const outputPath = "public/output_dash/output_compressed.mp4";
 
-const scaleOptions = [
-  "scale=1280:720",
-  "scale=640:320",
-  "scale=1920:1080",
-  "scale=854:480"
-];
-const videoCodec = "libx264";
-const x2640Options = "keyint=24:min-keyint=24:no-scenecut";
-const videoBitrates = ["500k", "1000k", "2000k", "4000k"];
-
+// Opções para reduzir o tamanho do arquivo MP4
+const videoCodec = "libx264"; // Codec de vídeo H.264
+const audioCodec = "aac"; // Codec de áudio AAC
+const videoBitrate = "300k"; // Bitrate de vídeo reduzido
+const audioBitrate = "96k"; // Bitrate de áudio reduzido
+const crf = 30; // Constant Rate Factor (CRF) para controle de qualidade (quanto menor, melhor qualidade)
+ 
 ffmpeg()
   .input(inputPath)
-  .videoFilter(scaleOptions)
   .videoCodec(videoCodec)
-  .addOption("-x264opts", x2640Options)
-  .outputOptions("-b:v", videoBitrates[0])
-  .format("dash")
+  .audioCodec(audioCodec)
+  .videoBitrate(videoBitrate)
+  .audioBitrate(audioBitrate)
+  .addOption("-crf", crf)
   .output(outputPath)
   .on("end", () => {
-    console.log("DASH Encoding  complete");
+    console.log("Conversão para MP4 completa");
+  })
+  .on("error", (err) => {
+    console.error("Erro durante a conversão para MP4:", err);
   })
   .run();

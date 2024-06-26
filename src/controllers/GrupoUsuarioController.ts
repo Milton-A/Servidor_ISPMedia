@@ -44,7 +44,32 @@ class GrupoUsuarioController {
     try {
       const grupoUsuario = await GrupoUsuario.findByPk(id);
       if (grupoUsuario) {
-        res.status(200).json(grupoUsuario);
+        res
+          .status(200)
+          .json({ message: "Groupo encontrado", data: grupoUsuario });
+      } else {
+        res.status(404).json({ error: "Grupo de usuário não encontrado" });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar grupo de usuário por ID:", error);
+      res.status(500).json({ error: "Erro ao buscar grupo de usuário por ID" });
+    }
+  }
+  /**
+   * Busca um grupo de usuário por ID
+   * @param req Request com o ID do grupo de usuário a ser buscado
+   * @param res Response para enviar a resposta HTTP
+   */
+  async findByUserId(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const grupoUsuario = await GrupoUsuario.findAll({
+        where: { id_perfil_usuario: id },
+      });
+      if (grupoUsuario) {
+        res
+          .status(200)
+          .json({ message: "Groupo encontrado", data: grupoUsuario });
       } else {
         res.status(404).json({ error: "Grupo de usuário não encontrado" });
       }
