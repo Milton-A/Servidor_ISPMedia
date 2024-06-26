@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import Midia from "../models/MidiaModel";
-import path from "path";
-const fs = require("fs");
+import { MidiaDTO } from "../utils/Types";
 
 class MidiaController {
   /**
@@ -9,11 +8,16 @@ class MidiaController {
    * @param req Request com os dados da mídia a ser criada
    * @param res Response para enviar a resposta HTTP
    */
+
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const novaMidia = req.body;
+      const novaMidia: MidiaDTO = req.body;
+      novaMidia.arquivo = req.file?.filename
+        ? req.file?.filename
+        : "Sem arquivo";
+
       const midiaCriada = await Midia.create(novaMidia);
-      res.status(201).json(midiaCriada);
+      res.status(201).json({ message: "Midias inserida", data: midiaCriada });
     } catch (error) {
       console.error("Erro ao criar mídia:", error);
       res.status(500).json({ error: "Erro ao criar mídia" });

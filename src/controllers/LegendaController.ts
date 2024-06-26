@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Legenda from "../models/LegendaModel";
-
+import { LegendaDTO } from "../utils/Types";
 class LegendaController {
   /**
    * Cria uma nova legenda
@@ -9,9 +9,16 @@ class LegendaController {
    */
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const novaLegenda = req.body;
+      const novaLegenda: LegendaDTO = req.body;
+      console.log(req.file);
+      novaLegenda.arquivo = req.file?.destination
+        ? req.file?.path
+        : "Sem arquivo";
+
       const legendaCriada = await Legenda.create(novaLegenda);
-      res.status(201).json(legendaCriada);
+      res
+        .status(201)
+        .json({ message: "Legenda inserida", data: legendaCriada });
     } catch (error) {
       console.error("Erro ao criar legenda:", error);
       res.status(500).json({ error: "Erro ao criar legenda" });
@@ -26,7 +33,7 @@ class LegendaController {
   async list(req: Request, res: Response): Promise<void> {
     try {
       const legendas = await Legenda.findAll();
-      res.status(200).json(legendas);
+      res.status(200).json({ message: "Legendas Listadas", data: legendas });
     } catch (error) {
       console.error("Erro ao listar legendas:", error);
       res.status(500).json({ error: "Erro ao listar legendas" });
