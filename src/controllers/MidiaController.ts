@@ -60,6 +60,7 @@ class MidiaController {
           },
         ],
       });
+      console.log(midias);
       res
         .status(200)
         .json({ message: "Mídias listadas com sucesso", data: midias });

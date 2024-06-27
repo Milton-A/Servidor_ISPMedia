@@ -15,7 +15,7 @@ export type MidiaDTO = {
   id_formato_media: number;
   tamanho: string;
   data: string;
-  id_perfil_usuario?: string | null;
+  id_perfil_usuario: number;
   estado: boolean;
   imagem: string;
 };

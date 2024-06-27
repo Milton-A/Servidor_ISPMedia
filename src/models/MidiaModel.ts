@@ -7,7 +7,7 @@ import GeneroMedia from "./GeneroMediaModel";
 import TipoMedia from "./TipoMediaModel";
 
 interface MidiaAttributes {
-  id_midia?: number;
+  id_midia: number;
   titulo: string;
   id_legenda: number;
   id_genero_media: number;
@@ -17,7 +17,7 @@ interface MidiaAttributes {
   id_formato_media: number;
   tamanho: string;
   data: string;
-  id_perfil_usuario?: number | null;
+  id_perfil_usuario: number;
   estado: boolean;
   imagem: string;
 }
@@ -34,7 +34,7 @@ class Midia extends Model<MidiaAttributes> implements MidiaAttributes {
   public id_formato_media!: number;
   public tamanho!: string;
   public data!: string;
-  public id_perfil_usuario?: number | null;
+  public id_perfil_usuario!: number;
   public estado!: boolean;
 }
 

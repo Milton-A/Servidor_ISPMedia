@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import GrupoUsuario from "../models/GroupUserModel";
 import GroupModel from "../models/GroupModel";
+import UserProfile from "../models/UserProfile";
+import PapelUsuarioGrupo from "../models/UserRoleGroupModel";
 
 class GrupoUsuarioController {
   /**
@@ -43,29 +45,6 @@ class GrupoUsuarioController {
     const { id } = req.params;
     try {
       const grupoUsuario = await GrupoUsuario.findByPk(id);
-      if (grupoUsuario) {
-        res
-          .status(200)
-          .json({ message: "Groupo encontrado", data: grupoUsuario });
-      } else {
-        res.status(404).json({ error: "Grupo de usuário não encontrado" });
-      }
-    } catch (error) {
-      console.error("Erro ao buscar grupo de usuário por ID:", error);
-      res.status(500).json({ error: "Erro ao buscar grupo de usuário por ID" });
-    }
-  }
-  /**
-   * Busca um grupo de usuário por ID
-   * @param req Request com o ID do grupo de usuário a ser buscado
-   * @param res Response para enviar a resposta HTTP
-   */
-  async findByUserId(req: Request, res: Response): Promise<void> {
-    const { id } = req.params;
-    try {
-      const grupoUsuario = await GrupoUsuario.findAll({
-        where: { id_perfil_usuario: id },
-      });
       if (grupoUsuario) {
         res
           .status(200)
@@ -153,6 +132,36 @@ class GrupoUsuarioController {
       res
         .status(500)
         .json({ error: "Erro ao excluir grupo de usuário por ID" });
+    }
+  }
+  async listDetailed(req: Request, res: Response): Promise<void> {
+    try {
+      const grupoUsuarios = await GrupoUsuario.findAll({
+        include: [
+          {
+            model: GroupModel,
+            as: "grupo",
+            attributes: ["id_grupo", "nome"],
+          },
+          {
+            model: UserProfile,
+            as: "perfilUsuario",
+            attributes: ["username"],
+          },
+          {
+            model: PapelUsuarioGrupo,
+            as: "papelUsuarioGrupo",
+            attributes: ["nome"],
+          },
+        ],
+      });
+
+      res.status(200).json(grupoUsuarios);
+    } catch (error) {
+      console.error("Erro ao listar grupos de usuários com detalhes:", error);
+      res
+        .status(500)
+        .json(`${error}: Erro ao listar grupos de usuários com detalhes`);
     }
   }
 }
