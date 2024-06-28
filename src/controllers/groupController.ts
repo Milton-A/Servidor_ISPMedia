@@ -4,9 +4,7 @@ import GroupModel from "../models/GroupModel";
 export const getAllGroups = async (req: Request, res: Response) => {
   try {
     const allGroups: GroupModel[] = await GroupModel.findAll();
-    return res
-      .status(200)
-      .json({ message: "Consulta grupos concluída", data: allGroups });
+    return res.status(200).json(allGroups);
   } catch (error) {
     console.error("Erro ao buscar todos os grupos:", error);
     return res
@@ -18,9 +16,7 @@ export const getAllGroups = async (req: Request, res: Response) => {
 export const createGroup = async (req: Request, res: Response) => {
   try {
     const createdGroup: GroupModel = await GroupModel.create({ ...req.body });
-    return res
-      .status(200)
-      .json({ message: "Grupo criado com sucesso!", data: createdGroup });
+    return res.status(200).json(createdGroup);
   } catch (error) {
     console.error("Erro ao criar grupo:", error);
     return res
@@ -34,9 +30,7 @@ export const updateGroup = async (req: Request, res: Response) => {
   try {
     await GroupModel.update({ ...req.body }, { where: { id } });
     const updatedGroup: GroupModel | null = await GroupModel.findByPk(id);
-    return res
-      .status(200)
-      .json({ message: "Grupo atualizado com sucesso!", data: updatedGroup });
+    return res.status(200).json(updatedGroup);
   } catch (error) {
     console.error("Erro ao atualizar grupo:", error);
     return res
@@ -55,9 +49,7 @@ export const deleteGroup = async (req: Request, res: Response) => {
         .json({ message: "Grupo não encontrado para exclusão" });
     }
     await GroupModel.destroy({ where: { id } });
-    return res
-      .status(200)
-      .json({ message: "Grupo eliminado com sucesso!", data: deletedGroup });
+    return res.status(200).json(deletedGroup);
   } catch (error) {
     console.error("Erro ao deletar grupo:", error);
     return res
@@ -73,9 +65,7 @@ export const getGroupById = async (req: Request, res: Response) => {
     if (!group) {
       return res.status(404).json({ message: "Grupo não encontrado" });
     }
-    return res
-      .status(200)
-      .json({ message: "Grupo encontrado com sucesso!", data: group });
+    return res.status(200).json(group);
   } catch (error) {
     console.error("Erro ao buscar grupo por ID:", error);
     return res

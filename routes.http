@@ -4,7 +4,7 @@ GET http://localhost:3003/user
 
 ###
 # @name create-user
-GET http://localhost:3003/groupUser/getByUserId/1
+GET http://localhost:3333/groupUser/getByUserId/1
 ###
 # @name get-midiaByUserId
 GET http://localhost:3003/playlistMidia/getByUserId/1
@@ -46,12 +46,12 @@ Content-Type: application/json
 }
 ###
 # @name create-groupUser
-POST http://localhost:3003/groupUser/create
+POST http://localhost:3333/groupUser/create
 Content-Type: application/json
 
 {
      
-  "id_grupo": 1,
+  "id_grupo": 2,
   "id_perfil_usuario": 1,
   "id_papel_usuario_grupo": 1,
   "data_entrada": "2024-06-25 13:23:05"

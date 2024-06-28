@@ -46,9 +46,7 @@ class GrupoUsuarioController {
     try {
       const grupoUsuario = await GrupoUsuario.findByPk(id);
       if (grupoUsuario) {
-        res
-          .status(200)
-          .json({ message: "Groupo encontrado", data: grupoUsuario });
+        res.status(200).json(grupoUsuario);
       } else {
         res.status(404).json({ error: "Grupo de usuário não encontrado" });
       }
