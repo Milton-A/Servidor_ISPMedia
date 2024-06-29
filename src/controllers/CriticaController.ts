@@ -52,6 +52,20 @@ class CriticaController {
       res.status(500).json({ error: "Erro ao buscar crítica por ID" });
     }
   }
+  async getCommentByIdMidia(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const critica = await Critica.findAll({ where: { id_midia: id } });
+      if (critica) {
+        res.status(200).json(critica);
+      } else {
+        res.status(404).json({ error: "Crítica não encontrada" });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar crítica por ID:", error);
+      res.status(500).json({ error: "Erro ao buscar crítica por ID" });
+    }
+  }
 
   /**
    * Atualiza uma crítica existente por ID

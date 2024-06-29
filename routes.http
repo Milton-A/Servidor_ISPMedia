@@ -8,6 +8,9 @@ GET http://localhost:3333/groupUser/getByUserId/1
 ###
 # @name get-midiaByUserId
 GET http://localhost:3003/playlistMidia/getByUserId/1
+###
+# @name get-getCommentByIdMidia
+GET http://localhost:3333/critica/getCommentByIdMidia/2
 
 ###
 # @name create-group
@@ -32,6 +35,18 @@ Content-Type: application/json
   "bio": "string",
   "senha": "string"
 }
+###
+POST http://localhost:3333/critica/create
+Content-Type: application/json
+
+{
+     
+   
+  "descricao": "string",
+  "id_perfil_usuario": 1,
+  "id_midia": 2
+}
+ 
 ###
 # @name create-groupUser
 POST http://localhost:3003/groupUser/create
@@ -152,73 +167,3 @@ Content-Type: application/json
 {
   "nome": "string"
 }
-###
-POST http://localhost:3000/Album
-Content-Type: application/json
-
-{
-     
-     "id_user": "2"
-}
-###
-POST http://localhost:3000/Album/getBySet
-Content-Type: application/json
-
-{
-     
-     "albums": ["2","1"]
-}
-###
-POST http://localhost:3000/user/getByName
-Content-Type: application/json
-
-{
- 
-     "email":"t"
-}
-
-
-###
-
-# @name edit-user
-POST http://localhost:3333/user/editUser/1
-Content-Type: application/json
-
-{
-      "name":"Tesa",
-     "password": "passwordHash",
-     "email":"s@gmail.com"
-} 
-
-###
-
-# @name edit-user
-POST http://localhost:3333/user/getById/1
-Content-Type: application/json
-
-{ 
-     "id": 1 
-}
-###
-
-# @name create-authentication
-POST  http://localhost:3000/create
-Content-Type: application/json
-
-{ 
-    "refreshToken" : "ya29.a0AfB_byAifDMP_AvgeeYZWpLsb_9eJOZqxxoTWvDxBVxsKSqhg7EMh-l-1X_u0E68rro-EOPmbPNPUydV6tpcVOHQ_ZOKGYy7bteX6oDrzhjs4d07LPFOzVikVRLF0ArXUKQDqQ-ebglpYxkNddLt-SnXI7cEFeAycPbEaCgYKAcESARMSFQHGX2Mi_sEdUnYy7ALHR2CCo_-vlw0171", 
-    "name": "psPhotos_"
-} 
-###
-
-# @name create-authentication
-POST  http://localhost:3000/album/createAlbum
-Content-Type: application/json
-
-{
-              "idAlbum": "response.data.data.id",
-              "nameAlbum": "response.data.data.name",
-              "webViewLink": "response.data.data.webViewLink",
-              "id_user":"1"
-
-} 
