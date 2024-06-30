@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import PlaylistMedia from "../models/PlaylistMidiaModel";
 import Playlist from "../models/PlaylistModel";
+import Midia from "../models/MidiaModel";
 
 type PlaylistMidia = {
   id_playlist_media: number;
@@ -100,6 +101,29 @@ class PlaylistMediaController {
       res.status(500).json({
         error: "Erro ao atualizar associação de mídia e playlist por ID",
       });
+    }
+  }
+  async getMidiaById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const playlists = await PlaylistMedia.findAll({
+        where: { id_midia: id },
+        include: [
+          {
+            model: Midia,
+            as: "midia",
+            attributes: ["titulo"],
+          },
+        ],
+      });
+      if (playlists) {
+        res.status(200).json(playlists);
+      } else {
+        res.status(404).json({ error: "Grupo de usuário não encontrado" });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar grupo de usuário por ID:", error);
+      res.status(500).json(`${error}: Erro ao buscar grupo de usuário por ID`);
     }
   }
   async getUserById(req: Request, res: Response): Promise<void> {
