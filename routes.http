@@ -6,8 +6,11 @@ GET http://localhost:3003/user
 # @name create-user
 GET http://localhost:3333/groupUser/getByUserId/1
 ###
-# @name get-midiaByUserId
+# @name get-playlistByUserId
 GET http://localhost:3003/playlistMidia/getByUserId/1
+###
+# @name get-midiaByUserId
+GET http://localhost:3333/playlistMidia/getMidiaById/1
 ###
 # @name get-getCommentByIdMidia
 GET http://localhost:3333/critica/getCommentByIdMidia/2
