@@ -6,6 +6,7 @@ import UserProfile from "../models/UserProfile";
 import GeneroMedia from "../models/GeneroMediaModel";
 import fs from "fs";
 import path from "path";
+import { MidiaDTO } from "../utils/Types";
 
 class MidiaController {
   /**
@@ -16,10 +17,28 @@ class MidiaController {
 
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const novaMidia = req.body;
-      novaMidia.arquivo = req.file?.filename
-        ? req.file?.filename
-        : "Sem arquivo";
+      console.log(req.body);
+      // const novaMidia: MidiaDTO = {
+      //   arquivo: req.file?.path ? req.file?.path : "Sem arquivo",
+      //   data: "",
+      //   duracao: "",
+      //   estado: true,
+      //   formato_media: "",
+      //   id_genero_media: 1,
+      //   id_legenda: 1,
+      //   id_perfil_usuario: 1,
+      //   id_tipo_media: 1,
+      //   imagem: "",
+      //   tamanho: "",
+      //   titulo: "",
+      //   descricao: "",
+      //   visibilidade: "",
+      // };
+      // novaMidia.arquivo = req.file?.path ? req.file?.path : "Sem arquivo";
+
+      const novaMidia: MidiaDTO = req.body;
+      novaMidia.arquivo = req.file?.path ? req.file?.path : "Sem arquivo";
+      novaMidia.estado = true;
 
       const midiaCriada = await Midia.create(novaMidia);
       res.status(201).json({ message: "Midias inserida", data: midiaCriada });

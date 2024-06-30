@@ -13,11 +13,7 @@ class LegendaController {
         estado: true,
         arquivo: "",
       };
-
-      console.log(req.file);
-      novaLegenda.arquivo = req.file?.destination
-        ? req.file?.path
-        : "Sem arquivo";
+      novaLegenda.arquivo = req.file?.path ? req.file?.path : "Sem arquivo";
 
       const legendaCriada = await Legenda.create({
         arquivo: novaLegenda.arquivo,

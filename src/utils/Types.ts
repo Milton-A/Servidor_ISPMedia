@@ -5,17 +5,19 @@ export type LegendaDTO = {
 };
 
 export type MidiaDTO = {
-  id_midia: number;
+  id_midia?: number;
   titulo: string;
   id_legenda: number;
   id_genero_media: number;
   id_tipo_media: number;
   duracao: string;
   arquivo: string;
-  formato_media: number;
+  formato_media: string;
   tamanho: string;
   data: string;
   id_perfil_usuario: number;
   estado: boolean;
   imagem: string;
+  descricao: string;
+  visibilidade: string;
 };
