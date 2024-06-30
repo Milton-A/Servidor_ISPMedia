@@ -33,43 +33,43 @@ Midia.init(
     },
     titulo: {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
     },
     descricao: {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
     },
     id_legenda: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     id_genero_media: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     id_tipo_media: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     duracao: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     arquivo: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     formato_media: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     tamanho: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     data: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     id_perfil_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -77,16 +77,16 @@ Midia.init(
     },
     estado: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
+      allowNull: true,
+      defaultValue: true,
     },
     imagem: {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
     },
     visibilidade: {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

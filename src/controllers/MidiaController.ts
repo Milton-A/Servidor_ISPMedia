@@ -6,7 +6,6 @@ import UserProfile from "../models/UserProfile";
 import GeneroMedia from "../models/GeneroMediaModel";
 import fs from "fs";
 import path from "path";
-import { MidiaDTO } from "../utils/Types";
 
 class MidiaController {
   /**
@@ -17,31 +16,43 @@ class MidiaController {
 
   async create(req: Request, res: Response): Promise<void> {
     try {
-      console.log(req.body);
-      // const novaMidia: MidiaDTO = {
-      //   arquivo: req.file?.path ? req.file?.path : "Sem arquivo",
-      //   data: "",
-      //   duracao: "",
-      //   estado: true,
-      //   formato_media: "",
-      //   id_genero_media: 1,
-      //   id_legenda: 1,
-      //   id_perfil_usuario: 1,
-      //   id_tipo_media: 1,
-      //   imagem: "",
-      //   tamanho: "",
-      //   titulo: "",
-      //   descricao: "",
-      //   visibilidade: "",
-      // };
-      // novaMidia.arquivo = req.file?.path ? req.file?.path : "Sem arquivo";
+      const {
+        data: {
+          titulo,
+          id_legenda,
+          id_genero_media,
+          id_tipo_media,
+          duracao,
+          formato_media,
+          tamanho,
+          data,
+          id_perfil_usuario,
+          estado,
+          descricao,
+          visibilidade,
+        },
+      } = req.body;
+      console.log(id_genero_media);
+      const novoArquivo = req.file ? req.file.path : "Sem arquivo";
 
-      const novaMidia: MidiaDTO = req.body;
-      novaMidia.arquivo = req.file?.path ? req.file?.path : "Sem arquivo";
-      novaMidia.estado = true;
+      const novaMidia = await Midia.create({
+        titulo,
+        id_legenda,
+        id_genero_media,
+        id_tipo_media,
+        duracao,
+        formato_media,
+        tamanho,
+        data,
+        id_perfil_usuario,
+        estado,
+        imagem: "",
+        descricao,
+        visibilidade,
+        arquivo: novoArquivo,
+      });
 
-      const midiaCriada = await Midia.create(novaMidia);
-      res.status(201).json({ message: "Midias inserida", data: midiaCriada });
+      res.status(201).json({ message: "Midias inserida", data: novaMidia });
     } catch (error) {
       console.error("Erro ao criar mídia:", error);
       res.status(500).json({ error: "Erro ao criar mídia" });
