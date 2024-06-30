@@ -1,30 +1,12 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
-import FormatoMedia from "./FormatoMidia";
 import UserProfile from "./UserProfile";
 import Legenda from "./LegendaModel";
 import GeneroMedia from "./GeneroMediaModel";
 import TipoMedia from "./TipoMediaModel";
+import { MidiaDTO } from "../utils/Types";
 
-interface MidiaAttributes {
-  id_midia: number;
-  titulo: string;
-  id_legenda: number;
-  id_genero_media: number;
-  id_tipo_media: number;
-  duracao: string;
-  arquivo: string;
-  formato_media: number;
-  tamanho: string;
-  data: string;
-  id_perfil_usuario: number;
-  estado: boolean;
-  imagem: string;
-  descricao: string;
-  visibilidade: string;
-}
-
-class Midia extends Model<MidiaAttributes> implements MidiaAttributes {
+class Midia extends Model<MidiaDTO> implements MidiaDTO {
   public imagem!: string;
   public id_midia!: number;
   public titulo!: string;
@@ -33,7 +15,7 @@ class Midia extends Model<MidiaAttributes> implements MidiaAttributes {
   public id_tipo_media!: number;
   public duracao!: string;
   public arquivo!: string;
-  public formato_media!: number;
+  public formato_media!: string;
   public tamanho!: string;
   public data!: string;
   public id_perfil_usuario!: number;
