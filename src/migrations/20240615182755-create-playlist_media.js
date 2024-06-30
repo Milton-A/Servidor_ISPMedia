@@ -13,10 +13,6 @@ module.exports = {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
       },
-      id_perfil_usuario: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-      },
       id_playlist: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,

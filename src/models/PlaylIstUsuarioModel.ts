@@ -1,23 +1,22 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
 import UserProfile from "./UserProfile";
-import Midia from "./MidiaModel";
 import Playlist from "./PlaylistModel";
 
-class PlaylistMedia extends Model {
-  id_playlist_media!: number;
-  id_midia!: number;
+class PlaylistUsuario extends Model {
+  id_playlist_usuario!: number;
+  id_perfil_usuario!: number;
   id_playlist!: number;
 }
 
-PlaylistMedia.init(
+PlaylistUsuario.init(
   {
-    id_playlist_media: {
+    id_playlist_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true,
     },
-    id_midia: {
+    id_perfil_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
@@ -28,17 +27,17 @@ PlaylistMedia.init(
   },
   {
     sequelize: connection,
-    tableName: "playlist_media",
+    tableName: "playlist_usuario",
     timestamps: true,
   }
 );
-PlaylistMedia.belongsTo(Midia, {
-  foreignKey: "id_midia",
-  as: "midia",
+PlaylistUsuario.belongsTo(UserProfile, {
+  foreignKey: "id_perfil_usuario",
+  as: "perfil_usuario",
 });
-PlaylistMedia.belongsTo(Playlist, {
+PlaylistUsuario.belongsTo(Playlist, {
   foreignKey: "id_playlist",
   as: "playlist",
 });
 
-export default PlaylistMedia;
+export default PlaylistUsuario;

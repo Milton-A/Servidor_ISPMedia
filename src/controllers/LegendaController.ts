@@ -9,13 +9,20 @@ class LegendaController {
    */
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const novaLegenda: LegendaDTO = req.body;
+      const novaLegenda: LegendaDTO = {
+        estado: true,
+        arquivo: "",
+      };
+
       console.log(req.file);
       novaLegenda.arquivo = req.file?.destination
         ? req.file?.path
         : "Sem arquivo";
 
-      const legendaCriada = await Legenda.create(novaLegenda);
+      const legendaCriada = await Legenda.create({
+        arquivo: novaLegenda.arquivo,
+        estado: novaLegenda.estado,
+      });
       res
         .status(201)
         .json({ message: "Legenda inserida", data: legendaCriada });

@@ -4,13 +4,13 @@ import connection from "../database/index";
 interface LegendaAttributes {
   id_legendas?: number;
   arquivo: string;
-  estado: string;
+  estado: boolean;
 }
 
 class Legenda extends Model<LegendaAttributes> implements LegendaAttributes {
   public id_legendas!: number;
   public arquivo!: string;
-  public estado!: string;
+  public estado!: boolean;
 }
 
 Legenda.init(
@@ -25,8 +25,9 @@ Legenda.init(
       allowNull: false,
     },
     estado: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
   },
   {

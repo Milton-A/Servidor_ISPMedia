@@ -22,6 +22,7 @@ import PlaylistMidiaRoot from "./playlistMidia/routes";
 import TipoMidiaRoot from "./tipoMidia/routes";
 import UserRoot from "./user/routes";
 import UserProfileRoot from "./userProfile/routes";
+import PlaylistUsuarioRoot from "./PlaylistUsuario/routes";
 
 const routes = express.Router();
 
@@ -48,6 +49,7 @@ routes.use("/notificationsVisualizer", NotificationsVisualizer);
 routes.use("/partilha", PartilhaRoot);
 routes.use("/playlist", PlaylistRoot);
 routes.use("/playlistMidia", PlaylistMidiaRoot);
+routes.use("/playlistUsuario", PlaylistUsuarioRoot);
 routes.use("/tipoMidia", TipoMidiaRoot);
 routes.use("/user", UserRoot);
 routes.use("/userProfile", UserProfileRoot);

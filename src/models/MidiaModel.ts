@@ -14,12 +14,14 @@ interface MidiaAttributes {
   id_tipo_media: number;
   duracao: string;
   arquivo: string;
-  id_formato_media: number;
+  formato_media: number;
   tamanho: string;
   data: string;
   id_perfil_usuario: number;
   estado: boolean;
   imagem: string;
+  descricao: string;
+  visibilidade: string;
 }
 
 class Midia extends Model<MidiaAttributes> implements MidiaAttributes {
@@ -31,11 +33,13 @@ class Midia extends Model<MidiaAttributes> implements MidiaAttributes {
   public id_tipo_media!: number;
   public duracao!: string;
   public arquivo!: string;
-  public id_formato_media!: number;
+  public formato_media!: number;
   public tamanho!: string;
   public data!: string;
   public id_perfil_usuario!: number;
   public estado!: boolean;
+  public descricao!: string;
+  public visibilidade!: string;
 }
 
 Midia.init(
@@ -47,6 +51,10 @@ Midia.init(
     },
     titulo: {
       type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    descricao: {
+      type: DataTypes.STRING(20),
       allowNull: false,
     },
     id_legenda: {
@@ -69,8 +77,8 @@ Midia.init(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    id_formato_media: {
-      type: DataTypes.INTEGER.UNSIGNED,
+    formato_media: {
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
     tamanho: {
@@ -90,7 +98,14 @@ Midia.init(
       allowNull: false,
       defaultValue: false,
     },
-    imagem: "",
+    imagem: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    visibilidade: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
   },
   {
     sequelize: connection,
@@ -99,10 +114,6 @@ Midia.init(
   }
 );
 
-Midia.belongsTo(FormatoMedia, {
-  foreignKey: "id_formato_media",
-  as: "formatoMedia",
-});
 Midia.belongsTo(UserProfile, {
   foreignKey: "id_perfil_usuario",
   as: "perfilUsuario",

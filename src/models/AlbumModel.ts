@@ -5,7 +5,6 @@ interface AlbumAttributes {
   id_album?: number;
   titulo?: string;
   data_lancamento?: Date;
-  genero?: string;
   capa?: string;
 }
 
@@ -30,10 +29,6 @@ Album.init(
     },
     data_lancamento: {
       type: DataTypes.DATE,
-      allowNull: false,
-    },
-    genero: {
-      type: DataTypes.STRING(50),
       allowNull: false,
     },
     capa: {

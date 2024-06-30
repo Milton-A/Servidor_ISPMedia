@@ -29,7 +29,7 @@ class GrupoUsuarioController {
   async list(req: Request, res: Response): Promise<void> {
     try {
       const gruposUsuarios = await GrupoUsuario.findAll();
-      res.status(200).json(gruposUsuarios);
+      res.status(200).json({ data: gruposUsuarios });
     } catch (error) {
       console.error("Erro ao listar grupos de usuários:", error);
       res.status(500).json(`${error}: Erro ao listar grupos de usuários`);
@@ -71,7 +71,7 @@ class GrupoUsuarioController {
       });
 
       if (grupoUsuario) {
-        res.status(200).json(grupoUsuario);
+        res.status(200).json({ data: grupoUsuario });
       } else {
         res.status(404).json({ error: "Grupo de usuário não encontrado" });
       }

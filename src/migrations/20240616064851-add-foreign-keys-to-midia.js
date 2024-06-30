@@ -4,18 +4,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addConstraint('midia', {
-      fields: ['id_formato_media'],
-      type: 'foreign key',
-      name: 'fk_formato_media_id_formato_media',
-      references: {
-        table: 'formato_media',
-        field: 'id_formato_media',
-      },
-      onDelete: 'cascade',
-      onUpdate: 'cascade',
-    });
-
-    await queryInterface.addConstraint('midia', {
       fields: ['id_perfil_usuario'],
       type: 'foreign key',
       name: 'fk_id_perfil_usuario',

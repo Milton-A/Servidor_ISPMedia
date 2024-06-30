@@ -3,29 +3,19 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('usuario', {
-      id_usuario: {
+    await queryInterface.createTable('playlist_usuario', {
+      id_playlist_usuario: {
         type: Sequelize.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
       },
-      nome: {
-        type: Sequelize.STRING(100),
+      id_perfil_usuario: {
+        type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
       },
-      sobrenome: {
-        type: Sequelize.STRING(100),
+      id_playlist: {
+        type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-        unique: true,
-      },
-      estado: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -41,6 +31,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('usuario');
+    await queryInterface.dropTable('playlist_usuario');
   }
 };

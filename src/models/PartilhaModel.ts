@@ -32,7 +32,7 @@ Partilha.init(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
-    id_usuario: {
+    id_perfil_usuario: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },

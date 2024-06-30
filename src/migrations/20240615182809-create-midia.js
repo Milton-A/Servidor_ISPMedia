@@ -33,12 +33,20 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
+      descricao: {
+        type: Sequelize.STRING(150),
+        allowNull: false,
+      },
+      visibilidade: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+      },
       imagem: {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      id_formato_media: {
-        type: Sequelize.INTEGER.UNSIGNED,
+      formato_media: {
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       tamanho: {
@@ -57,10 +65,6 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-      },
-      estado: {
-        type: Sequelize.STRING(100),
-        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,

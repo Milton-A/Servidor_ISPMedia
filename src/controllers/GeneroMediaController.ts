@@ -11,7 +11,7 @@ class GeneroMediaController {
     try {
       const novoGeneroMedia = req.body;
       const generoMediaCriado = await GeneroMedia.create(novoGeneroMedia);
-      res.status(201).json(generoMediaCriado);
+      res.status(201).json({ data: generoMediaCriado });
     } catch (error) {
       console.error("Erro ao criar gênero de mídia:", error);
       res.status(500).json({ error: "Erro ao criar gênero de mídia" });
@@ -26,7 +26,7 @@ class GeneroMediaController {
   async list(req: Request, res: Response): Promise<void> {
     try {
       const generosMedia = await GeneroMedia.findAll();
-      res.status(200).json(generosMedia);
+      res.status(200).json({ data: generosMedia });
     } catch (error) {
       console.error("Erro ao listar gêneros de mídia:", error);
       res.status(500).json({ error: "Erro ao listar gêneros de mídia" });
@@ -43,7 +43,7 @@ class GeneroMediaController {
     try {
       const generoMedia = await GeneroMedia.findByPk(id);
       if (generoMedia) {
-        res.status(200).json(generoMedia);
+        res.status(200).json({ data: generoMedia });
       } else {
         res.status(404).json({ error: "Gênero de mídia não encontrado" });
       }
@@ -70,7 +70,7 @@ class GeneroMediaController {
         }
       );
       if (generoMediaAtualizado[0] === 1) {
-        res.status(200).json(generoMediaAtualizado[1][0]);
+        res.status(200).json({ data: generoMediaAtualizado[1][0] });
       } else {
         res.status(404).json({ error: "Gênero de mídia não encontrado" });
       }
@@ -94,7 +94,7 @@ class GeneroMediaController {
         where: { id_genero_media: id },
       });
       if (generoMediaExcluido === 1) {
-        res.status(204).end();
+        res.status(204).json({ data: generoMediaExcluido });
       } else {
         res.status(404).json({ error: "Gênero de mídia não encontrado" });
       }

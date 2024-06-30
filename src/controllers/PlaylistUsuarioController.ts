@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import PlaylistMedia from "../models/PlaylistMidiaModel";
+import PlaylistUsuario from "../models/PlaylIstUsuarioModel";
 import Playlist from "../models/PlaylistModel";
 
 type PlaylistMidia = {
-  id_playlist_media: number;
-  id_midia: number;
+  id_playlist_usuario: number;
+  id_perfil_usuario: number;
   id_playlist: number;
   playlist: {
     nome: string;
   };
 };
-class PlaylistMediaController {
+class PlaylistUsuarioController {
   /**
    * Cria uma nova associação entre mídia e playlist
    * @param req Request com os dados da associação a ser criada
@@ -19,8 +19,8 @@ class PlaylistMediaController {
   async create(req: Request, res: Response): Promise<void> {
     try {
       const novaAssociacao = req.body;
-      const associacaoCriada = await PlaylistMedia.create(novaAssociacao);
-      res.status(201).json(associacaoCriada);
+      const associacaoCriada = await PlaylistUsuario.create(novaAssociacao);
+      res.status(201).json({ data: associacaoCriada });
     } catch (error) {
       console.error("Erro ao criar associação de mídia e playlist:", error);
       res
@@ -36,13 +36,13 @@ class PlaylistMediaController {
    */
   async list(req: Request, res: Response): Promise<void> {
     try {
-      const associacoes = await PlaylistMedia.findAll();
-      res.status(200).json(associacoes);
+      const associacoes = await PlaylistUsuario.findAll();
+      res.status(200).json({ data: associacoes });
     } catch (error) {
-      console.error("Erro ao listar associações de mídia e playlist:", error);
+      console.error("Erro ao listar associações de usuario e playlist:", error);
       res
         .status(500)
-        .json({ error: "Erro ao listar associações de mídia e playlist" });
+        .json({ error: "Erro ao listar associações de usuario e playlist" });
     }
   }
 
@@ -54,7 +54,7 @@ class PlaylistMediaController {
   async findById(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      const associacao = await PlaylistMedia.findByPk(id);
+      const associacao = await PlaylistUsuario.findByPk(id);
       if (associacao) {
         res.status(200).json(associacao);
       } else {
@@ -80,7 +80,7 @@ class PlaylistMediaController {
     const { id } = req.params;
     const novosDadosAssociacao = req.body;
     try {
-      const associacaoAtualizada = await PlaylistMedia.update(
+      const associacaoAtualizada = await PlaylistUsuario.update(
         novosDadosAssociacao,
         {
           where: { id_playlist_media: id },
@@ -88,7 +88,7 @@ class PlaylistMediaController {
         }
       );
       if (associacaoAtualizada[0] === 1) {
-        res.status(200).json(associacaoAtualizada[1][0]);
+        res.status(200).json({ data: associacaoAtualizada[1][0] });
       } else {
         res.status(404).json({ error: "Associação não encontrada" });
       }
@@ -105,8 +105,7 @@ class PlaylistMediaController {
   async getUserById(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      const grupoUsuario = await PlaylistMedia.findAll({
-        where: { id_perfil_usuario: id },
+      const playlistUsuario = await PlaylistUsuario.findAll({
         include: [
           {
             model: Playlist,
@@ -115,28 +114,30 @@ class PlaylistMediaController {
           },
         ],
       });
-      const playlistsUnicas: { [key: string]: PlaylistMidia } = {};
-      grupoUsuario.forEach((item) => {
-        const playlistNome = item.dataValues.playlist.nome;
-        if (!playlistsUnicas[playlistNome]) {
-          playlistsUnicas[playlistNome] = {
-            ...item.dataValues,
-            playlist: item.dataValues.playlist,
-            updatedAt: item.dataValues.updatedAt, // Ensure this is set
-          };
-        }
-      });
+      //   const playlistsUnicas: { [key: string]: PlaylistMidia } = {};
+      //   playlistUsuario.forEach((item) => {
+      //     const playlistNome = item.dataValues.playlist.nome;
+      //     if (!playlistsUnicas[playlistNome]) {
+      //       playlistsUnicas[playlistNome] = {
+      //         ...item.dataValues,
+      //         playlist: item.dataValues.playlist,
+      //         updatedAt: item.dataValues.updatedAt, // Ensure this is set
+      //       };
+      //     }
+      //   });
 
-      const resultadoFinal = Object.values(playlistsUnicas);
+      //   const resultadoFinal = Object.values(playlistsUnicas);
 
-      if (grupoUsuario) {
-        res.status(200).json(resultadoFinal);
+      if (playlistUsuario) {
+        res.status(200).json({ data: playlistUsuario });
       } else {
         res.status(404).json({ error: "Grupo de usuário não encontrado" });
       }
     } catch (error) {
-      console.error("Erro ao buscar grupo de usuário por ID:", error);
-      res.status(500).json(`${error}: Erro ao buscar grupo de usuário por ID`);
+      console.error("Erro ao buscar playlist de usuário por ID:", error);
+      res
+        .status(500)
+        .json(`${error}: Erro ao buscar playlist de usuário por ID`);
     }
   }
   /**
@@ -147,11 +148,11 @@ class PlaylistMediaController {
   async delete(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      const associacaoExcluida = await PlaylistMedia.destroy({
+      const associacaoExcluida = await PlaylistUsuario.destroy({
         where: { id_playlist_media: id },
       });
       if (associacaoExcluida === 1) {
-        res.status(204).end();
+        res.status(204).json({ data: associacaoExcluida });
       } else {
         res.status(404).json({ error: "Associação não encontrada" });
       }
@@ -167,4 +168,4 @@ class PlaylistMediaController {
   }
 }
 
-export default new PlaylistMediaController();
+export default new PlaylistUsuarioController();

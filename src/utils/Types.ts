@@ -1,7 +1,7 @@
 export type LegendaDTO = {
   id_legendas?: number;
   arquivo: string;
-  estado: string;
+  estado: boolean;
 };
 
 export type MidiaDTO = {
@@ -12,7 +12,7 @@ export type MidiaDTO = {
   id_tipo_media: number;
   duracao: string;
   arquivo: string;
-  id_formato_media: number;
+  formato_media: number;
   tamanho: string;
   data: string;
   id_perfil_usuario: number;
