@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
+import UserModel from "./UserModel";
 
 class UserProfile extends Model {
   id_perfil_usuario!: number;
@@ -45,5 +46,8 @@ UserProfile.init(
     timestamps: true,
   }
 );
-
+UserProfile.belongsTo(UserModel, {
+  foreignKey: "id_usuario",
+  as: "user",
+});
 export default UserProfile;

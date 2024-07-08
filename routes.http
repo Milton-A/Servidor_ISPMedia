@@ -1,6 +1,6 @@
 
 # @name create-user
-GET http://localhost:3003/user
+GET http://localhost:3333/userProfile
 
 ###
 # @name create-user
@@ -27,13 +27,13 @@ Content-Type: application/json
 }
 ###
 # @name create-userProfile
-POST http://localhost:3003/userProfile/create
+POST http://localhost:3333/userProfile/create
 Content-Type: application/json
 
 {
      
-   "id_usuario": 1,
-  "username": "string",
+   "id_usuario": 2,
+  "username": "string2",
   "avatar": "string",
   "bio": "string",
   "senha": "string"
@@ -75,8 +75,13 @@ Content-Type: application/json
   "data_entrada": "2024-06-25 13:23:05"
 }
 ###
+POST  http://localhost:3333/playlistUsuario/create
+Content-Type: application/json
+
+{"id_perfil_usuario":1,"id_playlist":3}
+###
 # @name create-user
-POST http://localhost:3003/user/create
+POST http://localhost:3333/user/create
 Content-Type: application/json
 
 {
@@ -84,7 +89,7 @@ Content-Type: application/json
   "nome": "string",
   "sobrenome": "string",
   "senha": "string",
-  "email": "20201063@isptec.co.ao"
+  "email": "adrianonovo33@gmail.com"
 }
 ###
 # @name create-playlistMedia

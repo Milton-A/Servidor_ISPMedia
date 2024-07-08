@@ -4,7 +4,7 @@ import UserProfile from "./UserProfile";
 import Playlist from "./PlaylistModel";
 
 class PlaylistUsuario extends Model {
-  id_playlist_usuario!: number;
+  id_playlist_usuario?: number;
   id_perfil_usuario!: number;
   id_playlist!: number;
 }

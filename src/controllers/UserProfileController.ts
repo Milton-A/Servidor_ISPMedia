@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserProfile from "../models/UserProfile";
 import bcrypt from "bcrypt";
+import UserModel from "../models/UserModel";
 const saltRounds = 10;
 
 interface AuthenticatedRequest extends Request {
@@ -41,8 +42,16 @@ class UserProfileController {
 
   async list(req: Request, res: Response): Promise<void> {
     try {
-      const perfis: UserProfile[] = await UserProfile.findAll();
-      res.status(200).json(perfis);
+      const perfis = await UserProfile.findAll({
+        include: [
+          {
+            model: UserModel,
+            as: "user",
+            attributes: ["nome", "sobrenome"],
+          },
+        ],
+      });
+      res.status(200).json({ data: perfis });
     } catch (error) {
       console.error("Erro ao listar perfis de usuários:", error);
       res.status(500).json({ error: "Erro ao listar perfis de usuários" });

@@ -27,11 +27,11 @@ class UserController {
    */
   async list(req: Request, res: Response): Promise<void> {
     try {
-      const usuarios: UserModel[] = await UserModel.findAll();
-      res.status(200).json(usuarios);
+      const users = await UserModel.findAll();
+      res.status(200).json({ data: users });
     } catch (error) {
-      console.error("Erro ao listar usuários:", error);
-      res.status(500).json({ error: "Erro ao listar usuários" });
+      console.error("Erro ao listar Usuários:", error);
+      res.status(500).json({ error: "Erro ao listar Usuários" });
     }
   }
 
