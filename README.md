@@ -1,8 +1,13 @@
 ---
 
+
 ## Configuração e Migração das Tabelas com Sequelize
 
-### Passo 1: Gerar as Migrations
+### 1. Instalação ddas dependencias
+
+```npm install  ```
+
+### Passo 1: Gerar as Migrations 
 
 Execute os seguintes comandos para gerar as migrations necessárias:
 

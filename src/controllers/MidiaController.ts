@@ -6,6 +6,7 @@ import UserProfile from "../models/UserProfile";
 import GeneroMedia from "../models/GeneroMediaModel";
 import fs from "fs";
 import path from "path";
+import { comrpessMidia } from "../services/compress";
 
 class MidiaController {
   /**
@@ -16,6 +17,9 @@ class MidiaController {
 
   async create(req: Request, res: Response): Promise<void> {
     try {
+      const novoArquivo = await comrpessMidia(
+        req.file ? req.file.path : "Sem arquivo"
+      );
       const {
         data: {
           titulo,
@@ -33,7 +37,6 @@ class MidiaController {
         },
       } = req.body;
       console.log(id_genero_media);
-      const novoArquivo = req.file ? req.file.path : "Sem arquivo";
 
       const novaMidia = await Midia.create({
         titulo,
