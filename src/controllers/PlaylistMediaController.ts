@@ -107,12 +107,17 @@ class PlaylistMediaController {
     const { id } = req.params;
     try {
       const playlists = await PlaylistMedia.findAll({
-        where: { id_midia: id },
+        where: { id_playlist: id },
         include: [
           {
             model: Midia,
             as: "midia",
             attributes: ["titulo"],
+          },
+          {
+            model: Playlist,
+            as: "playlist",
+            attributes: ["nome"],
           },
         ],
       });

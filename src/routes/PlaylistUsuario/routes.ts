@@ -9,5 +9,6 @@ router.put("/update/:id", PlaylistUsuarioController.update);
 router.get("/getGroup/:id", PlaylistUsuarioController.findById);
 router.get("/getByUserId/:id", PlaylistUsuarioController.getUserById);
 router.delete("/delete/:id", PlaylistUsuarioController.delete);
+router.get("/getUsersPlaylist/:id", PlaylistUsuarioController.getUsersPlaylist);
 
 export default router;

@@ -62,10 +62,13 @@ class PlaylistController {
     const { id } = req.params;
     const novosDadosPlaylist = req.body;
     try {
-      const playlistAtualizada = await Playlist.update(novosDadosPlaylist, {
-        where: { id_playlist: id },
-        returning: true,
-      });
+      const playlistAtualizada = await Playlist.update(
+        { nome: novosDadosPlaylist.nome },
+        {
+          where: { id_playlist: id },
+          returning: true,
+        }
+      );
       if (playlistAtualizada[0] === 1) {
         res.status(200).json(playlistAtualizada[1][0]);
       } else {

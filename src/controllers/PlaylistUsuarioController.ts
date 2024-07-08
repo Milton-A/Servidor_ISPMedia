@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import PlaylistUsuario from "../models/PlaylIstUsuarioModel";
 import Playlist from "../models/PlaylistModel";
+import UserProfile from "../models/UserProfile";
 
 type PlaylistMidia = {
   id_playlist_usuario: number;
@@ -18,9 +19,14 @@ class PlaylistUsuarioController {
    */
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const novaAssociacao = req.body;
-      const associacaoCriada = await PlaylistUsuario.create(novaAssociacao);
-      res.status(201).json({ data: associacaoCriada });
+      const novasAssociacoes = req.body;
+
+      console.log("Teste de envio:  ", novasAssociacoes);
+
+      const associacoesCriadas = await PlaylistUsuario.bulkCreate(
+        novasAssociacoes
+      );
+      res.status(201).json({ data: associacoesCriadas });
     } catch (error) {
       console.error("Erro ao criar associação de mídia e playlist:", error);
       res
@@ -102,6 +108,34 @@ class PlaylistUsuarioController {
       });
     }
   }
+
+  async getUsersPlaylist(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const playlistUsuarios = await PlaylistUsuario.findAll({
+        where: { id_playlist: id },
+        include: [
+          {
+            model: UserProfile,
+            as: "perfil_usuario",
+            attributes: ["id_perfil_usuario", "username"], // Atributos do perfil de usuário que deseja retornar
+          },
+        ],
+      });
+
+      if (playlistUsuarios) {
+        res.status(200).json({ data: playlistUsuarios });
+      } else {
+        res.status(404).json({ error: "Usuários da playlist não encontrados" });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar usuários da playlist por ID:", error);
+      res
+        .status(500)
+        .json({ error: "Erro ao buscar usuários da playlist por ID" });
+    }
+  }
+
   async getUserById(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
@@ -149,7 +183,7 @@ class PlaylistUsuarioController {
     const { id } = req.params;
     try {
       const associacaoExcluida = await PlaylistUsuario.destroy({
-        where: { id_playlist_media: id },
+        where: { id_playlist_usuario: id },
       });
       if (associacaoExcluida === 1) {
         res.status(204).json({ data: associacaoExcluida });
