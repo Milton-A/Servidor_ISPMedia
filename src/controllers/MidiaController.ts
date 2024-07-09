@@ -34,10 +34,20 @@ class MidiaController {
           estado,
           descricao,
           visibilidade,
+          imagem,
         },
       } = req.body;
-      console.log(id_genero_media);
 
+      if (!imagem) {
+        res.status(400).send("No image provided");
+      }
+      console.log(imagem);
+      const matches = imagem.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
+      if (!matches) {
+        res.status(400).send("Invalid image format");
+      }
+
+      const imageBuffer = Buffer.from(matches[2], "base64");
       const novaMidia = await Midia.create({
         titulo,
         id_legenda,
@@ -49,7 +59,7 @@ class MidiaController {
         data,
         id_perfil_usuario,
         estado,
-        imagem: "",
+        imagem: imageBuffer,
         descricao,
         visibilidade,
         arquivo: novoArquivo.split("/")[2],
@@ -89,10 +99,16 @@ class MidiaController {
           },
         ],
       });
-      console.log(midias);
-      res
-        .status(200)
-        .json({ message: "Mídias listadas com sucesso", data: midias });
+
+      const midiasComImagensBase64 = midias.map((midia) => ({
+        ...midia.toJSON(),
+        imagem: midia.imagem.toString("base64"),
+      }));
+
+      res.status(200).json({
+        message: "Mídias listadas com sucesso",
+        data: midiasComImagensBase64,
+      });
     } catch (error) {
       console.error("Erro ao listar mídias:", error);
       res.status(500).json({ error: "Erro ao listar mídias" });
@@ -150,7 +166,6 @@ class MidiaController {
       const videoPath = "output_dash/output_compressed.mp4";
 
       const videoFilePath = path.join("public/output_dash", midia);
-      console.log(videoFilePath);
       const stat = fs.statSync(videoFilePath);
       const fileSize = stat.size;
 

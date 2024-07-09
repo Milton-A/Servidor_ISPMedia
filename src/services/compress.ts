@@ -22,7 +22,6 @@ const crf: number = 30; // Constant Rate Factor (CRF) para controle de qualidade
 export const comrpessMidia = (file: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     const value = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    console.log(file);
     const outputPath: string = `public/output_dash/${value}.mp4`;
     const ffmpegCommand: FfmpegCommand = ffmpeg()
       .input(file)

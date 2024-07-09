@@ -7,7 +7,7 @@ import TipoMedia from "./TipoMediaModel";
 import { MidiaDTO } from "../utils/Types";
 
 class Midia extends Model<MidiaDTO> implements MidiaDTO {
-  public imagem!: string;
+  public imagem!: Buffer;
   public id_midia!: number;
   public titulo!: string;
   public id_legenda!: number;
@@ -22,6 +22,12 @@ class Midia extends Model<MidiaDTO> implements MidiaDTO {
   public estado!: boolean;
   public descricao!: string;
   public visibilidade!: string;
+  createdAt: any;
+  updatedAt: any;
+  tipoMedia: any;
+  perfilUsuario: any;
+  legenda: any;
+  generoMedia: any;
 }
 
 Midia.init(
@@ -81,7 +87,7 @@ Midia.init(
       defaultValue: true,
     },
     imagem: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.BLOB("long"),
       allowNull: true,
     },
     visibilidade: {

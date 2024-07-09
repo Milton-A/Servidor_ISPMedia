@@ -21,8 +21,6 @@ class PlaylistUsuarioController {
     try {
       const novasAssociacoes = req.body;
 
-      console.log("Teste de envio:  ", novasAssociacoes);
-
       const associacoesCriadas = await PlaylistUsuario.bulkCreate(
         novasAssociacoes
       );

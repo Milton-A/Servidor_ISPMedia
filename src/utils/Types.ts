@@ -17,7 +17,7 @@ export type MidiaDTO = {
   data: string;
   id_perfil_usuario: number;
   estado: boolean;
-  imagem: string;
+  imagem?: Buffer;
   descricao: string;
   visibilidade: string;
 };
