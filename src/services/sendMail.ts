@@ -17,12 +17,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const SendEmail = (sendTo: string) => {
+export const SendEmail = (sendTo: string, text: string) => {
   const mailOptions = {
     from: "ISPMedia",
     to: sendTo,
     subject: "Activação de conta",
-    text: "A sua senha para fazer login na plataforma ISPMedia é 123456",
+    text,
   };
 
   transporter.sendMail(mailOptions, (error: Error, info: Response) => {

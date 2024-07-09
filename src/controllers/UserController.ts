@@ -12,8 +12,7 @@ class UserController {
     try {
       const novoUsuario = req.body;
       const usuarioCriado = await UserModel.create(novoUsuario);
-      SendEmail(novoUsuario.email);
-      res.status(201).json(usuarioCriado);
+      res.status(200).json({ data: usuarioCriado });
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
       res.status(500).json({ error: "Erro ao criar usuário" });

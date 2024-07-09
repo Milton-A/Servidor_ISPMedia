@@ -52,7 +52,7 @@ class MidiaController {
         imagem: "",
         descricao,
         visibilidade,
-        arquivo: novoArquivo,
+        arquivo: novoArquivo.split("/")[2],
       });
 
       res.status(201).json({ message: "Midias inserida", data: novaMidia });
@@ -145,9 +145,12 @@ class MidiaController {
 
   async stream(req: Request, res: Response): Promise<void> {
     try {
-      const videoPath = "output_dash/output_compressed.mp4";
-      const videoFilePath = path.join("public", videoPath);
+      const { midia } = req.params;
 
+      const videoPath = "output_dash/output_compressed.mp4";
+
+      const videoFilePath = path.join("public/output_dash", midia);
+      console.log(videoFilePath);
       const stat = fs.statSync(videoFilePath);
       const fileSize = stat.size;
 

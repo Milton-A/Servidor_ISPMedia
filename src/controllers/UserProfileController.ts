@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import UserProfile from "../models/UserProfile";
 import bcrypt from "bcrypt";
 import UserModel from "../models/UserModel";
+import { SendEmail } from "../services/sendMail";
 const saltRounds = 10;
 
 interface AuthenticatedRequest extends Request {
@@ -30,10 +31,15 @@ class UserProfileController {
   async create(req: Request, res: Response): Promise<void> {
     try {
       const novoPerfil = req.body;
+      const password = novoPerfil.senha;
       novoPerfil.senha = await generatePassword(novoPerfil.senha);
+      SendEmail(
+        novoPerfil.email,
+        `Para entra na plataforma ISPMedia, as suas credênciais são \nUsername: ${novoPerfil.username} \nSenha: ${password}`
+      );
 
       const perfilCriado = await UserProfile.create(novoPerfil);
-      res.status(201).json(perfilCriado);
+      res.status(201).json({ data: perfilCriado });
     } catch (error) {
       console.error("Erro ao criar perfil de usuário:", error);
       res.status(500).json({ error: "Erro ao criar perfil de usuário" });

@@ -32,12 +32,11 @@ Content-Type: application/json
 
 {
      
-   "id_usuario": 2,
-  "username": "string2",
-  "avatar": "string",
-  "bio": "string",
-  "senha": "string"
-}
+   "id_usuario": 10,
+  "username": "string2323",
+  "senha": "string",
+  "email": "20201063@isptec.co.ao"
+  }
 ###
 POST http://localhost:3333/critica/create
 Content-Type: application/json
@@ -89,7 +88,7 @@ Content-Type: application/json
   "nome": "string",
   "sobrenome": "string",
   "senha": "string",
-  "email": "adrianonovo33@gmail.com"
+  "email": "adrianonovo3@gmail.com"
 }
 ###
 # @name create-playlistMedia
