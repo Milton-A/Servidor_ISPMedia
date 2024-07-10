@@ -16,7 +16,7 @@ export const getAllGroups = async (req: Request, res: Response) => {
 export const createGroup = async (req: Request, res: Response) => {
   try {
     const createdGroup: GroupModel = await GroupModel.create({ ...req.body });
-    return res.status(200).json(createdGroup);
+    return res.status(200).json({ data: createdGroup });
   } catch (error) {
     console.error("Erro ao criar grupo:", error);
     return res

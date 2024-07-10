@@ -11,7 +11,7 @@ class CriticaController {
     try {
       const novaCritica = req.body;
       const criticaCriada = await Critica.create(novaCritica);
-      res.status(201).json(criticaCriada);
+      res.status(201).json({ data: criticaCriada });
     } catch (error) {
       console.error("Erro ao criar crítica:", error);
       res.status(500).json({ error: "Erro ao criar crítica" });
@@ -57,7 +57,7 @@ class CriticaController {
     try {
       const critica = await Critica.findAll({ where: { id_midia: id } });
       if (critica) {
-        res.status(200).json(critica);
+        res.status(200).json({ data: critica });
       } else {
         res.status(404).json({ error: "Crítica não encontrada" });
       }

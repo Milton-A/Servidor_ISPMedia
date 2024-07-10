@@ -13,7 +13,7 @@ GET http://localhost:3003/playlistMidia/getByUserId/1
 GET http://localhost:3333/playlistMidia/getMidiaById/1
 ###
 # @name get-getCommentByIdMidia
-GET http://localhost:3333/critica/getCommentByIdMidia/2
+GET http://localhost:3333/critica/getMidiaById/2
 
 ###
 # @name create-group
@@ -32,7 +32,7 @@ Content-Type: application/json
 
 {
      
-   "id_usuario": 10,
+   "id_usuario": 1,
   "username": "string2323",
   "senha": "string",
   "email": "20201063@isptec.co.ao"
@@ -79,6 +79,11 @@ Content-Type: application/json
 
 {"id_perfil_usuario":1,"id_playlist":3}
 ###
+POST  http://localhost:3333/playlistUsuario/create
+Content-Type: application/json
+
+{"id_perfil_usuario":1,"id_playlist":3}
+###
 # @name create-user
 POST http://localhost:3333/user/create
 Content-Type: application/json
@@ -88,7 +93,7 @@ Content-Type: application/json
   "nome": "string",
   "sobrenome": "string",
   "senha": "string",
-  "email": "adrianonovo3@gmail.com"
+  "email": "adrianonovo34@gmail.com"
 }
 ###
 # @name create-playlistMedia

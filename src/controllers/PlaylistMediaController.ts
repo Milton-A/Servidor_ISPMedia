@@ -20,8 +20,8 @@ class PlaylistMediaController {
   async create(req: Request, res: Response): Promise<void> {
     try {
       const novaAssociacao = req.body;
-      const associacaoCriada = await PlaylistMedia.create(novaAssociacao);
-      res.status(201).json(associacaoCriada);
+      const associacaoCriada = await PlaylistMedia.bulkCreate(novaAssociacao);
+      res.status(201).json({ data: associacaoCriada });
     } catch (error) {
       console.error("Erro ao criar associação de mídia e playlist:", error);
       res
@@ -122,7 +122,7 @@ class PlaylistMediaController {
         ],
       });
       if (playlists) {
-        res.status(200).json(playlists);
+        res.status(200).json({ data: playlists });
       } else {
         res.status(404).json({ error: "Grupo de usuário não encontrado" });
       }

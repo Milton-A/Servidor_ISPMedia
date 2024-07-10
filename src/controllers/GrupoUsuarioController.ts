@@ -14,7 +14,7 @@ class GrupoUsuarioController {
     try {
       const novoGrupoUsuario = req.body;
       const grupoUsuarioCriado = await GrupoUsuario.create(novoGrupoUsuario);
-      res.status(201).json(grupoUsuarioCriado);
+      res.status(201).json({ data: grupoUsuarioCriado});
     } catch (error) {
       console.error("Erro ao criar grupo de usuário:", error);
       res.status(500).json(error);

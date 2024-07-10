@@ -10,8 +10,8 @@ class TipoMediaController {
   async create(req: Request, res: Response): Promise<void> {
     try {
       const novoTipoMedia = req.body;
-      const tipoMediaCriado = await TipoMedia.create(novoTipoMedia);
-      res.status(201).json(tipoMediaCriado);
+      const tipoMediaCriado = await TipoMedia.bulkCreate(novoTipoMedia);
+      res.status(201).json({ data: tipoMediaCriado });
     } catch (error) {
       console.error("Erro ao criar tipo de mídia:", error);
       res.status(500).json({ error: "Erro ao criar tipo de mídia" });
@@ -26,7 +26,7 @@ class TipoMediaController {
   async list(req: Request, res: Response): Promise<void> {
     try {
       const tiposMedia = await TipoMedia.findAll();
-      res.status(200).json({ message: "Tipos concluída", data: tiposMedia });
+      res.status(200).json({ data: tiposMedia });
     } catch (error) {
       console.error("Erro ao listar tipos de mídia:", error);
       res.status(500).json({ error: "Erro ao listar tipos de mídia" });

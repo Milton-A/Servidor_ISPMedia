@@ -11,7 +11,7 @@ class PlaylistController {
     try {
       const novaPlaylist = req.body;
       const playlistCriada = await Playlist.create(novaPlaylist);
-      res.status(201).json(playlistCriada);
+      res.status(201).json({ data: playlistCriada });
     } catch (error) {
       console.error("Erro ao criar playlist:", error);
       res.status(500).json({ error: "Erro ao criar playlist" });
