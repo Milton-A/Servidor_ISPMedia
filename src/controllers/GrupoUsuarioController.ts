@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import GrupoUsuario from "../models/GroupUserModel";
-import GroupModel from "../models/GroupModel";
+import GroupModel from "../models/groupModel";
 import UserProfile from "../models/UserProfile";
 import PapelUsuarioGrupo from "../models/UserRoleGroupModel";
 
@@ -13,8 +13,11 @@ class GrupoUsuarioController {
   async create(req: Request, res: Response): Promise<void> {
     try {
       const novoGrupoUsuario = req.body;
-      const grupoUsuarioCriado = await GrupoUsuario.create(novoGrupoUsuario);
-      res.status(201).json({ data: grupoUsuarioCriado});
+      const grupoUsuarioCriado = await GrupoUsuario.bulkCreate(
+        novoGrupoUsuario
+      );
+
+      res.status(201).json({ data: grupoUsuarioCriado });
     } catch (error) {
       console.error("Erro ao criar grupo de usuário:", error);
       res.status(500).json(error);
@@ -66,6 +69,11 @@ class GrupoUsuarioController {
             model: GroupModel,
             as: "grupo",
             attributes: ["nome"],
+          },
+          {
+            model: UserProfile,
+            as: "perfil_usuario",
+            attributes: ["id_perfil_usuario", "username"],
           },
         ],
       });

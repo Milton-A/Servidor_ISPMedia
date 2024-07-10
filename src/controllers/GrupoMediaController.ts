@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import GrupoMediaModel from "../models/GrupoMediaModel";
+import Midia from "../models/MidiaModel";
+import GrupoModel from "../models/groupModel";
 
 class GrupoMediaController {
   /**
@@ -11,7 +13,7 @@ class GrupoMediaController {
     try {
       const novoGrupoMedia = req.body;
       const grupoMediaCriado = await GrupoMediaModel.create(novoGrupoMedia);
-      res.status(201).json(grupoMediaCriado);
+      res.status(201).json({ data: grupoMediaCriado });
     } catch (error) {
       console.error("Erro ao criar grupo_media:", error);
       res.status(500).json({ error: "Erro ao criar grupo_media" });
@@ -25,8 +27,21 @@ class GrupoMediaController {
    */
   async list(req: Request, res: Response): Promise<void> {
     try {
-      const grupoMedia = await GrupoMediaModel.findAll();
-      res.status(200).json(grupoMedia);
+      const grupoMedia = await GrupoMediaModel.findAll({
+        include: [
+          {
+            model: Midia,
+            as: "midia",
+            attributes: ["titulo"],
+          },
+          {
+            model: GrupoModel,
+            as: "grupo",
+            attributes: ["nome"],
+          },
+        ],
+      });
+      res.status(200).json({ data: grupoMedia });
     } catch (error) {
       console.error("Erro ao listar grupo_media:", error);
       res.status(500).json({ error: "Erro ao listar grupo_media" });
@@ -43,7 +58,7 @@ class GrupoMediaController {
     try {
       const grupoMedia = await GrupoMediaModel.findByPk(id);
       if (grupoMedia) {
-        res.status(200).json(grupoMedia);
+        res.status(200).json({ data: grupoMedia });
       } else {
         res.status(404).json({ error: "Registro não encontrado" });
       }
@@ -70,7 +85,7 @@ class GrupoMediaController {
         }
       );
       if (grupoMediaAtualizado[0] === 1) {
-        res.status(200).json(grupoMediaAtualizado[1][0]);
+        res.status(200).json({ data: grupoMediaAtualizado[1][0] });
       } else {
         res.status(404).json({ error: "Registro não encontrado" });
       }
@@ -99,6 +114,34 @@ class GrupoMediaController {
     } catch (error) {
       console.error("Erro ao excluir grupo_media por ID:", error);
       res.status(500).json({ error: "Erro ao excluir grupo_media por ID" });
+    }
+  }
+  async getMidiaById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const playlists = await GrupoMediaModel.findAll({
+        where: { id_grupo: id },
+        include: [
+          {
+            model: Midia,
+            as: "midia",
+            attributes: ["titulo"],
+          },
+          {
+            model: GrupoModel,
+            as: "grupo",
+            attributes: ["nome"],
+          },
+        ],
+      });
+      if (playlists) {
+        res.status(200).json({ data: playlists });
+      } else {
+        res.status(404).json({ error: "Grupo de usuário não encontrado" });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar grupo de usuário por ID:", error);
+      res.status(500).json(`${error}: Erro ao buscar grupo de usuário por ID`);
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import GroupModel from "../models/GroupModel";
+import GroupModel from "../models/groupModel";
 
 export const getAllGroups = async (req: Request, res: Response) => {
   try {

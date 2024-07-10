@@ -75,6 +75,9 @@ Aplique as migrations para criar as tabelas no banco de dados:
 
 ```bash
 npx sequelize-cli db:migrate
+
+popular a BD
+npx sequelize-cli db:seed:all
 ```
 
 ---

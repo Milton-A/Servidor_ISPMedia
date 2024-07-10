@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
-import GroupModel from "./GroupModel";
+import GroupModel from "./groupModel";
 import UserProfile from "./UserProfile";
 
 interface GrupoUsuarioAttributes {

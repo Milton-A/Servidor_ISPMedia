@@ -41,7 +41,6 @@ class MidiaController {
       if (!imagem) {
         res.status(400).send("No image provided");
       }
-      console.log(imagem);
       const matches = imagem.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
       if (!matches) {
         res.status(400).send("Invalid image format");

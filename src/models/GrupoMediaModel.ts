@@ -1,6 +1,8 @@
 // Importe os módulos necessários do Sequelize
 import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../database/index";
+import GrupoModel from "./groupModel";
+import Midia from "./MidiaModel";
 
 interface GrupoMediaAttributes {
   id_grupo_media?: number;
@@ -40,5 +42,14 @@ GrupoMediaModel.init(
     timestamps: true,
   }
 );
+
+GrupoMediaModel.belongsTo(Midia, {
+  foreignKey: "id_media",
+  as: "midia",
+});
+GrupoMediaModel.belongsTo(GrupoModel, {
+  foreignKey: "id_grupo",
+  as: "grupo",
+});
 
 export default GrupoMediaModel;

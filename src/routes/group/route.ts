@@ -5,7 +5,7 @@ import {
   getAllGroups,
   getGroupById,
   updateGroup,
-} from "../../controllers/GroupController";
+} from "../../controllers/groupController";
 
 const routes = express.Router();
 

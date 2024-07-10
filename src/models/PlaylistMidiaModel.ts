@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../database/index";
-import UserProfile from "./UserProfile";
 import Midia from "./MidiaModel";
 import Playlist from "./PlaylistModel";
 

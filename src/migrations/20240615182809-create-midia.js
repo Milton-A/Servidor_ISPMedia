@@ -42,7 +42,7 @@ module.exports = {
         allowNull: false,
       },
       imagem: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.BLOB("long"),
         allowNull: false,
       },
       formato_media: {

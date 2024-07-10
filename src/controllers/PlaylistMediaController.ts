@@ -38,7 +38,7 @@ class PlaylistMediaController {
   async list(req: Request, res: Response): Promise<void> {
     try {
       const associacoes = await PlaylistMedia.findAll();
-      res.status(200).json(associacoes);
+      res.status(200).json({ data: associacoes });
     } catch (error) {
       console.error("Erro ao listar associações de mídia e playlist:", error);
       res
@@ -57,7 +57,7 @@ class PlaylistMediaController {
     try {
       const associacao = await PlaylistMedia.findByPk(id);
       if (associacao) {
-        res.status(200).json(associacao);
+        res.status(200).json({ data: associacao });
       } else {
         res.status(404).json({ error: "Associação não encontrada" });
       }
@@ -89,7 +89,7 @@ class PlaylistMediaController {
         }
       );
       if (associacaoAtualizada[0] === 1) {
-        res.status(200).json(associacaoAtualizada[1][0]);
+        res.status(200).json({ data: associacaoAtualizada[1][0] });
       } else {
         res.status(404).json({ error: "Associação não encontrada" });
       }
@@ -159,7 +159,7 @@ class PlaylistMediaController {
       const resultadoFinal = Object.values(playlistsUnicas);
 
       if (grupoUsuario) {
-        res.status(200).json(resultadoFinal);
+        res.status(200).json({ data: resultadoFinal });
       } else {
         res.status(404).json({ error: "Grupo de usuário não encontrado" });
       }
